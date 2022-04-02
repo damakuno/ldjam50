@@ -1,9 +1,10 @@
 local Button = {}
 
-function Button:new(x, y, width, height, image, hoverImage, text, font, object)
+function Button:new(name, x, y, width, height, image, hoverImage, text, font, object)
     if width == nil then width = image.width end
     if height == nil then height = image.height end
     object = object or {
+        name = name,
         x = x,
         y = y,
         width = width,
@@ -18,9 +19,13 @@ function Button:new(x, y, width, height, image, hoverImage, text, font, object)
         isHover = false,        
         visible = true
     }
+    
+    sh:curScene().mouseCallbacks[object.name] = object
+
     setmetatable(object, self)
     self.__index = self
-    table.insert(sh:curScene().mouseCallbacks, object)
+    -- table.insert(sh:curScene().mouseCallbacks, object)
+    
     return object
 end
 

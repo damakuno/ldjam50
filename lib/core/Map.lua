@@ -17,7 +17,7 @@ function Map:new(mapConfig, object)
 
     for key, values in pairs(mapConfig) do        
         if values.type == "Button" then            
-            object.mapButtons[values.name] = Button:new(
+            object.mapButtons[values.name] = Button:new(values.name,
                 values.x, values.y,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),

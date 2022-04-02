@@ -19,7 +19,7 @@ function Story:new(path, portraits, font, object)
 
     for key, values in pairs(LIP.load(path..".ini")) do      
         if values.type == "Button" then   
-            object.dialogButtons[values.name] = Button:new(
+            object.dialogButtons[values.name] = Button:new(values.name,
                 values.x, values.y,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
@@ -44,8 +44,8 @@ function Story:new(path, portraits, font, object)
 
     local story = object.story[object.story_index]    
     object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, 500, 700)
-    object.dialog.selectedPortraitName = object.story[object.story_index].alias
-    table.insert(sh:curScene().mouseCallbacks, object)
+    object.dialog.selectedPortraitName = object.story[object.story_index].alias    
+    sh:curScene().mouseCallbacks["story"] = object
     setmetatable(object, self)
     self.__index = self
     return object
@@ -88,6 +88,9 @@ end
 function Story:reset()
     self.story = {}
     self.story_index = 1
+    self.callback = {}
+    self.started = false
+    self.dialogButtons = {}
 end
 
 function Story:stop()
@@ -103,7 +106,7 @@ function Story:setNewStory(path)
 
     for key, values in pairs(LIP.load(path..".ini")) do
         if values.type == "Button" then            
-            self.dialogButtons[values.name] = Button:new(
+            self.dialogButtons[values.name] = Button:new(values.name,
                 values.x, values.y,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),

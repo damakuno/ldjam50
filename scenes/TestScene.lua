@@ -5,7 +5,7 @@ local Scene = {
         -- test_bat = Anime:new("bat", love.graphics.newImage("res/images/bat.png"), 200, 139, 1, 1, true, true)
         pp = Anime:new("pp", love.graphics.newImage("res/images/pp.png"), 200, 200)
         pp_hover = Anime:new("pp_hover", love.graphics.newImage("res/images/pp_hover.png"), 200, 200)
-        test_button = Button:new(0, 0, 200, 200, pp, pp_hover)
+        test_button = Button:new("test", 0, 0, 200, 200, pp, pp_hover)
         test_dialog = Dialog:new(nil, "Just a test dialog.", font)  
         test_dialog.ticks = 0.07 --ticks control the dialog speed
         

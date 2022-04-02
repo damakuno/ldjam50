@@ -32,19 +32,50 @@ local Scene = {
             status_text = "Visit your sister at the hospital"
         end
 
-        map.mapButtons["Hospital"].onclick = function()                            
-            -- map.mapButtons["Hospital"].visible = false  
+        map.mapButtons["Hospital"].onclick = function()
+            debug_text = "hospital clicked"
             map:hide()
             story:setNewStory("dialog/hospital_act1")
             story:registerCallback("storyend", function()
-                debug_text = "storyend triggered"
-                -- map.mapButtons["Hospital"].visible = true
-                map:show()
-                player.acceptance = player.acceptance + 5
+                debug_text = "hospital storyend triggered"
+                map:show() 
                 setPlayerText()
-            end)
+            end)            
+            story.dialogButtons["option1"].onclick = function()
+                debug_text = "option1 clicked"
+                story:stop()
+            end
+            story.dialogButtons["option2"].onclick = function()
+                debug_text = "option2 clicked"
+                story:stop()
+            end
             story:start()
         end
+
+        map.mapButtons["Work"].onhover = function()
+            status_text = "Go to work"
+        end
+
+        map.mapButtons["Work"].onclick = function()                 
+            debug_text = "work clicked"                                   
+            map:hide()
+            story:setNewStory("dialog/work_act1")
+            story:registerCallback("storyend", function()                  
+                debug_text = "work storyend triggered"              
+                map:show()                
+                setPlayerText()
+            end)            
+            story.dialogButtons["option1"].onclick = function()
+                debug_text = "option1 clicked"
+                story:stop()
+            end       
+            story.dialogButtons["option2"].onclick = function()
+                debug_text = "option2 clicked"
+                story:stop()
+            end
+            story:start()
+        end
+
     end,
     draw = function(self)
         map:draw()
@@ -59,12 +90,12 @@ local Scene = {
         end
     end,
     mousepressed = function(self, x, y, button)
-        for i, obj in ipairs(self.mouseCallbacks) do
+        for i, obj in pairs(self.mouseCallbacks) do
             if obj ~= nil and obj.mousepressed ~=nil then obj:mousepressed(x, y, button) end
         end
     end,
     mousemoved = function(self, x, y, dx, dy, istouch)
-        for i, obj in ipairs(self.mouseCallbacks) do
+        for i, obj in pairs(self.mouseCallbacks) do
             if obj ~= nil and obj.mousemoved ~=nil then obj:mousemoved(x, y, dx, dy, istouch) end
         end
     end

@@ -18,6 +18,8 @@ function Dialog:new(dialogConfig, text, font, x, y, limit, align, ticks, increme
         callback = {},
         callbackFlag = {}
     }
+    -- TODO: display portraits along with the text, probably have an object store it
+    -- load the portraits from the dialogConfig, and decide from logic which portrait to highlight/display
 
     setmetatable(object, self)
 	table.insert(sh:curScene().updates, object)

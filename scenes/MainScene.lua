@@ -16,8 +16,7 @@ local Scene = {
         
         map = Map:new(mapConfig)                
 
-        story = Story:new("dialog/hospital_act1", portraits, font)
-        
+        story = Story:new("dialog/hospital_act1", portraits, font)        
         -- status text to display on button hover
         status_text = ""
         -- dialog text, and which character is saying them will be set in a file.
@@ -29,12 +28,13 @@ local Scene = {
         end
 
         map.mapButtons["Hospital"].onclick = function()                            
-            map.mapButtons["Hospital"].visible = false    
-            setPlayerText()
+            map.mapButtons["Hospital"].visible = false                
             story:setNewStory("dialog/hospital_act1")
             story:registerCallback("storyend", function()
                 debug_text = "storyend triggered"
                 map.mapButtons["Hospital"].visible = true
+                player.acceptance = player.acceptance + 5
+                setPlayerText()
             end)
             story:start()
         end

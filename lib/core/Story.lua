@@ -6,6 +6,7 @@ function Story:new(path, portraits, font, object)
         path = path,
         font = font,
         dialogfile = path .. ".dialog",
+        dialogButtons = {},
         portraits = portraits,        
         started = false,
         story = {},
@@ -15,6 +16,20 @@ function Story:new(path, portraits, font, object)
 
     assert(type(object.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')
     local file = assert(io.open(object.dialogfile, "r"), "Error loading dialog file : " .. object.dialogfile)
+
+    for key, values in pairs(LIP.load(path..".ini")) do      
+        if values.type == "Button" then   
+            object.dialogButtons[values.name] = Button:new(
+                values.x, values.y,
+                values.width, values.height,
+                Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
+                Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),                
+                values.text,
+                font
+            )
+            object.dialogButtons[values.name].visible = false
+        end
+    end
 
     for line in file:lines() do
         local k, v = line:match("(.-) (.+)$")
@@ -42,6 +57,9 @@ end
 
 function Story:draw()
     self.dialog:draw()
+    for key, value in pairs(self.dialogButtons) do
+        if value ~= nil then value:draw() end
+    end
 end
 
 function Story:mousepressed(x, y, button)    
@@ -84,6 +102,20 @@ function Story:setNewStory(path)
     assert(type(self.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')
     local file = assert(io.open(self.dialogfile, "r"), "Error loading dialog file : " .. self.dialogfile)
 
+    for key, values in pairs(LIP.load(path..".ini")) do
+        if values.type == "Button" then            
+            self.dialogButtons[values.name] = Button:new(
+                values.x, values.y,
+                values.width, values.height,
+                Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
+                Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),                
+                values.text,
+                font
+            )
+            self.dialogButtons[values.name].visible = false
+        end
+    end
+
     for line in file:lines() do
         local k, v = line:match("(.-) (.+)$")
         if (k and v ~= nil) then
@@ -95,6 +127,8 @@ function Story:setNewStory(path)
     end
     file:close()
 
+    
+
     self.started = false
     local story = self.story[self.story_index]
     self.dialog = Dialog:new(self.portaits, story.text, self.font, 20, 500, 700)
@@ -104,6 +138,9 @@ function Story:registerCallback(event, callback)
     if event == "storyend" then
         local storyEndCallback = function(dialog)
             if self.story_index == #(self.story) then
+                for key, value in pairs(self.dialogButtons) do
+                    if value ~= nil then value.visible = true end
+                end
                 callback(self)
             end
         end

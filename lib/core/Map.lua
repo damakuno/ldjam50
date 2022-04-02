@@ -19,7 +19,9 @@ function Map:new(mapConfig, object)
                 values.x, values.y,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
-                Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height)
+                Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),
+                values.name,
+                font
             )
         end
     end
@@ -34,7 +36,7 @@ function Map:update(dt)
 end
 
 function Map:draw()
-    -- TODO: draw buttons and background image according to the config
+    -- TODO: draw background image according to the config
     for key, value in pairs(self.mapButtons) do
         if value ~= nil then value:draw() end
     end

@@ -1,6 +1,6 @@
 local Button = {}
 
-function Button:new(x, y, width, height, image, hoverImage, object)
+function Button:new(x, y, width, height, image, hoverImage, text, font, object)
     if width == nil then width = image.width end
     if height == nil then height = image.height end
     object = object or {
@@ -9,6 +9,8 @@ function Button:new(x, y, width, height, image, hoverImage, object)
         width = width,
         height = height,
         image = image,
+        text = text,
+        font = font,
         hoverImage = hoverImage or image,
         onclick = function(x, y, button) end,
         onclickOutside = function(x, y, button) end,
@@ -60,6 +62,9 @@ function Button:draw()
         self.hoverImage:draw(self.x, self.y)
     else
         self.image:draw(self.x, self.y)
+    end
+    if self.text ~=nil then
+        love.graphics.printf(self.text, self.font, self.x + 20, self.y + 10, self.width)
     end
 end
 

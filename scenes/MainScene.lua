@@ -23,6 +23,9 @@ local Scene = {
         -- dialog_text = "This is just some dialog, use this test dialog text as you wish. It can be anything really."
         -- dialog = Dialog:new(portraits, dialog_text, font, 20, 500, 700)
 
+        calendar = Calendar:new()
+        calendar:load()
+
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"
         end
@@ -42,6 +45,7 @@ local Scene = {
     draw = function(self)
         map:draw()
         story:draw()
+        calendar:draw()
         love.graphics.printf(status_text, font, 20, 450, 500)
         love.graphics.print(player_stats_text, 1000, 40)
     end,

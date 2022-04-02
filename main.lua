@@ -9,7 +9,7 @@ sh = SceneHandler:new()
 
 globalUpdates = {}
 globalMouseCallbacks = {}
-mouse = {x = 0, y = 0, dx = 0, dy = 0, pressed = false}
+mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 
 player = { cash = 0, stress = 0, maxStress = 100, acceptance = 0 }
 

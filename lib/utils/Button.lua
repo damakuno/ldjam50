@@ -11,6 +11,7 @@ function Button:new(x, y, width, height, image, hoverImage, object)
         image = image,
         hoverImage = hoverImage or image,
         onclick = function(x, y, button) end,
+        onclickOutside = function(x, y, button) end
         onhover = function(x, y, dx, dy, istouch) end,
         isHover = false,
         price = nil,
@@ -38,6 +39,8 @@ function Button:mousepressed(x, y, button)
         mouse.pressed = true
         if self:isWithin(x, y) then        
             if self.onclick ~= nil then self.onclick(x, y, button) end
+        else
+            if self.onclickOutside ~= nil then self.onclickOutside(x, y, button) end
         end
     end
 end
@@ -47,7 +50,7 @@ function Button:mousemoved(x, y, dx, dy, istouch)
     if self:isWithin(x, y) then        
         self.isHover = true
 		if self.onclick ~= nil then self.onhover(x, y, dx, dy, istouch) end
-    else        
+    else
         self.isHover = false
     end
 end
@@ -58,9 +61,6 @@ function Button:draw()
         self.hoverImage:draw(self.x, self.y)
     else
         self.image:draw(self.x, self.y)
-    end
-    if self.price ~=nil then
-        love.graphics.print(self.price.." SOULS", shop_font, self.x + self.image.width / 4, self.y + self.image.height + 10)
     end
 end
 

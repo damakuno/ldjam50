@@ -1,16 +1,19 @@
 local Map = {}
 
-function Map:new(buttonConfig, object)
-    -- Load the MapLayout.ini into buttonConfig
+function Map:new(mapConfig, object)
+    -- TODO: Load the MapLayout.ini into mapConfig
     object = object or {
-        -- List of map ui elements, Button objects, initialize them and store them into mapButtons for easy access.
+        -- TODO: List of map ui elements, Button objects, initialize them and store them into "mapButtons" for easy access.
+        -- TODO: store the background image specified in mapConfig to "background"
+        mapConfig = mapConfig,
         mapButtons = {},
+        background = nil,
         callback = {},
         callbackFlag = {},
         visible = true
     }
 
-    -- do the for loop here to initalize the mapButtons and store them
+    -- TODO: do the for loop here to initalize the mapButtons and store them
     setmetatable(object, self)
     self.__index = self	
     return object
@@ -20,8 +23,8 @@ function Map:update(dt)
 
 end
 
-function Map:draw(x, y)
-    
+function Map:draw()
+    -- TODO: draw buttons and background image according to the config
 end
 
 -- use callbacks by calling for example: self.callback["stressMaxed"](some, parameters)

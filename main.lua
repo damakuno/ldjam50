@@ -9,6 +9,7 @@ Mail = require "lib.core.Mail"
 MailItem = require "lib.core.MailItem"
 Calendar = require "lib.core.Calendar"
 Story = require "lib.core.Story"
+Phone = require "lib.core.Phone"
 
 sh = SceneHandler:new()
 

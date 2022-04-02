@@ -27,6 +27,7 @@ function Calendar:update(dt)
 end
 
 function Calendar:draw()
+    calList = self:expandToList()
     -- draw background if necessary
     -- get the position of the calendar from the config
     -- draw the 5 dates sequentially with an offset between them

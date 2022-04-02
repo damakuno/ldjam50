@@ -62,7 +62,7 @@ function Story:draw()
     end
 end
 
-function Story:mousepressed(x, y, button)    
+function Story:mousepressed(x, y, button)
     if button == 1 and self.started == true and self.dialog.str_index > 2 then        
         local skipped = self.dialog:skipDialog()
         if self.story_index == #(self.story) then

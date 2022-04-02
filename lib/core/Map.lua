@@ -8,6 +8,8 @@ function Map:new(mapConfig, object)
         mapConfig = mapConfig,
         mapButtons = {},
         background = nil,
+        backgroundX = 0,
+        backgroundY = 0,
         callback = {},
         callbackFlag = {},
         visible = true
@@ -24,6 +26,11 @@ function Map:new(mapConfig, object)
                 font
             )
         end
+        if values.type == "Background" then        
+            object.background = Anime:new(values.name, love.graphics.newImage(values.image), values.width, values.height)
+            object.backgroundX = values.x            
+            object.backgroundY = values.y
+        end
     end
     
 
@@ -33,10 +40,11 @@ function Map:new(mapConfig, object)
 end
 
 function Map:update(dt)
+    
 end
 
-function Map:draw()
-    -- TODO: draw background image according to the config
+function Map:draw()    
+    self.background:draw(self.backgroundX, self.backgroundY)
     for key, value in pairs(self.mapButtons) do
         if value ~= nil then value:draw() end
     end

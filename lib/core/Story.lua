@@ -11,7 +11,10 @@ function Story:new(path, portraits, font, object)
         started = false,
         story = {},
         story_index = 1,
-        callback = {}
+        callback = {},
+        background = nil,
+        backgroundX = 0,
+        backgroundY = 0
     }
 
     assert(type(object.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')
@@ -45,6 +48,10 @@ function Story:new(path, portraits, font, object)
     local story = object.story[object.story_index]    
     object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, 500, 700)
     object.dialog.selectedPortraitName = object.story[object.story_index].alias    
+
+    object.background = Anime:new("Dialogue BG", love.graphics.newImage("res/images/ui/ui_dialogue_bg.png"))
+    object.backgroundY = love.graphics.getHeight() - object.background.spriteSheet:getHeight()
+
     sh:curScene().mouseCallbacks["story"] = object
     setmetatable(object, self)
     self.__index = self
@@ -56,6 +63,7 @@ function Story:update(dt)
 end
 
 function Story:draw()
+    self.background:draw(self.backgroundX, self.backgroundY)
     self.dialog:draw()
     for key, value in pairs(self.dialogButtons) do
         if value ~= nil then value:draw() end

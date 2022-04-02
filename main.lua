@@ -10,6 +10,7 @@ MailItem = require "lib.core.MailItem"
 Calendar = require "lib.core.Calendar"
 Story = require "lib.core.Story"
 Phone = require "lib.core.Phone"
+Stats = require "lib.core.Stats"
 
 sh = SceneHandler:new()
 

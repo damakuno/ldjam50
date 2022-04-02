@@ -25,6 +25,8 @@ local Scene = {
         calendar = Calendar:new()
         calendar:load()
 
+        stats = Stats:new()
+
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"
         end
@@ -96,6 +98,8 @@ local Scene = {
     draw = function(self)
         map:draw()
         story:draw()
+        phone:draw()
+        stats:draw()
         calendar:draw()
         love.graphics.printf(status_text, font, 20, 450, 500)
         love.graphics.print(player_stats_text, 1000, 40)

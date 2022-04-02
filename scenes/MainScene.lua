@@ -33,11 +33,13 @@ local Scene = {
         end
 
         map.mapButtons["Hospital"].onclick = function()                            
-            map.mapButtons["Hospital"].visible = false                
+            -- map.mapButtons["Hospital"].visible = false  
+            map:hide()
             story:setNewStory("dialog/hospital_act1")
             story:registerCallback("storyend", function()
                 debug_text = "storyend triggered"
-                map.mapButtons["Hospital"].visible = true
+                -- map.mapButtons["Hospital"].visible = true
+                map:show()
                 player.acceptance = player.acceptance + 5
                 setPlayerText()
             end)

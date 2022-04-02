@@ -24,6 +24,8 @@ function Map:draw(x, y)
     
 end
 
+-- use callbacks by calling for example: self.callback["stressMaxed"](some, parameters)
+-- and also set the flag to true if you only want to trigger it once: self.callbackFlag["stressMaxed"] = true
 function Map:registerCallback(event, callback)
     self.callback[event] = callback
     self.callbackFlag[event] = false

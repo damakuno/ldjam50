@@ -4,6 +4,10 @@ Anime = require "lib.utils.Anime"
 Button = require "lib.utils.Button"
 LIP = require "lib.utils.LIP"
 Map = require "lib.core.Map"
+Mail = require "lib.core.Mail"
+MailItem = require "lib.core.MailItem"
+Calendar = require "lib.core.Calendar"
+Dialog = require "lib.core.Dialog"
 
 sh = SceneHandler:new()
 
@@ -14,7 +18,9 @@ mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 player = { cash = 0, stress = 0, maxStress = 100, acceptance = 0 }
 
 function love.load()
-    love.window.setMode(1280, 720)
+    love.window.setMode(1280, 720)    
+    font = love.graphics.newFont("res/fonts/lucon.ttf", 12)
+    srcBlip = love.audio.newSource("res/audio/blip2.wav", "static")
     mapConfig = LIP.load('config/MapLayout.ini')
     settings = LIP.load('config/Settings.ini')
     sh:setScene(1)    

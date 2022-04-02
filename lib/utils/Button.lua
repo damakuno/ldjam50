@@ -36,8 +36,7 @@ function Button:mousepressed(x, y, button)
     if self.visible ~= true then return end
     if button == 1 then
         mouse.pressed = true
-        if self:isWithin(x, y) then
-            -- button1_status = "button 1 pressed"
+        if self:isWithin(x, y) then        
             if self.onclick ~= nil then self.onclick(x, y, button) end
         end
     end
@@ -45,12 +44,10 @@ end
 
 function Button:mousemoved(x, y, dx, dy, istouch)
     if self.visible ~= true then return end
-    if self:isWithin(x, y) then
-        button1_status = "button 1 hovered"		
+    if self:isWithin(x, y) then        
         self.isHover = true
 		if self.onclick ~= nil then self.onhover(x, y, dx, dy, istouch) end
-    else
-        button1_status = "button 1 not hovered"
+    else        
         self.isHover = false
     end
 end

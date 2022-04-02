@@ -36,6 +36,9 @@ function love.mousemoved(x, y, dx, dy, istouch)
     mouse.y = y
     mouse.dx = dx
     mouse.dy = dy
+    if sh:curScene().mousemoved ~= nil then
+        sh:curScene():mousemoved(x, y, dx, dy, istouch)
+    end
     for i, obj in ipairs(globalMouseCallbacks) do
         if obj ~= nil and obj.mousemoved ~=nil then obj:mousemoved(x, y, dx, dy, istouch) end
     end

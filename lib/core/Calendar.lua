@@ -28,6 +28,7 @@ end
 
 function Calendar:draw()
     -- draw background if necessary
+    -- get the position of the calendar from the config
     -- draw the 5 dates sequentially with an offset between them
     -- use the visible flag if necessary to hide/show it
 end

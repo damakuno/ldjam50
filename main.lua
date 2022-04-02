@@ -3,6 +3,7 @@ Timer = require "lib.utils.Timer"
 Anime = require "lib.utils.Anime"
 Button = require "lib.utils.Button"
 LIP = require "lib.utils.LIP"
+Map = require "lib.core.Map"
 
 sh = SceneHandler:new()
 
@@ -12,6 +13,7 @@ mouse = {x = 0, y = 0, dx = 0, dy = 0, pressed = false}
 
 function love.load()
     love.window.setMode(1280, 720)
+    mapConfig = LIP.load('config/MapLayout.ini')
     settings = LIP.load('config/Settings.ini')
     sh:setScene(1)    
 end

@@ -13,8 +13,7 @@ function Button:new(x, y, width, height, image, hoverImage, object)
         onclick = function(x, y, button) end,
         onclickOutside = function(x, y, button) end,
         onhover = function(x, y, dx, dy, istouch) end,
-        isHover = false,
-        price = nil,
+        isHover = false,        
         visible = true
     }
     setmetatable(object, self)

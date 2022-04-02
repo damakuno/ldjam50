@@ -18,7 +18,8 @@ mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 player = { cash = 0, stress = 0, maxStress = 100, acceptance = 0 }
 
 function love.load()
-    love.window.setMode(1280, 720)    
+    debug_text = "debug"
+    love.window.setMode(1280, 720)
     font = love.graphics.newFont("res/fonts/lucon.ttf", 12)
     srcBlip = love.audio.newSource("res/audio/blip2.wav", "static")
     mapConfig = LIP.load('config/MapLayout.ini')
@@ -28,6 +29,7 @@ end
 
 function love.draw()
     sh:curScene():draw()
+    love.graphics.print(debug_text, 500, 20)
 end
 
 function love.update(dt)

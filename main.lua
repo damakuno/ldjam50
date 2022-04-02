@@ -15,8 +15,6 @@ globalUpdates = {}
 globalMouseCallbacks = {}
 mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 
-player = { cash = 0, stress = 0, maxStress = 100, acceptance = 0 }
-
 function love.load()
     debug_text = "debug"
     love.window.setMode(1280, 720)

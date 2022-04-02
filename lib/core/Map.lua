@@ -13,7 +13,6 @@ function Map:new(mapConfig, object)
         visible = true
     }
 
-    -- TODO: do the for loop here to initalize the mapButtons and store them
     for key, values in pairs(mapConfig) do        
         if values.type == "Button" then            
             object.mapButtons[values.name] = Button:new(
@@ -25,6 +24,7 @@ function Map:new(mapConfig, object)
         end
     end
     
+
     setmetatable(object, self)
     self.__index = self	
     return object

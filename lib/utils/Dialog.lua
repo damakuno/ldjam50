@@ -15,6 +15,7 @@ function Dialog:new(portaits, text, font, x, y, limit, align, ticks, increment, 
         str_index = 1,
         display_text = "",
         displaying = false,
+        selectedPortraitName = "",
         portraits = {}, -- <- two Anime objects would go here, with positions set in Portraits.ini
         callback = {},
         callbackFlag = {}
@@ -40,6 +41,10 @@ end
 
 function Dialog:draw()
     love.graphics.printf(self.display_text, self.font, self.x, self.y, self.limit, self.align)
+    if self.enabled == true then
+        local selectedPortrait = portraits[self.selectedPortraitName]        
+        if selectedPortrait ~= nill then selectedPortrait:draw(20, 50) end
+    end
 end
 
 function Dialog:addIncrement(num)
@@ -89,9 +94,10 @@ function Dialog:skipDialog()
     return false
 end
 
-function Dialog:setNewDialog(text)
+function Dialog:setNewDialog(text, selectedPortraitName)
     if self.displaying == false then
-        self.text = text
+        self.text = text        
+        self.selectedPortraitName = selectedPortraitName
         self.str_index = 1
         self.displaying = true                        
         if self.callbackFlag["textend"] ~= nil then

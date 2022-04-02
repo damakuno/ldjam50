@@ -44,7 +44,7 @@ function Story:new(path, portraits, font, object)
 
     local story = object.story[object.story_index]    
     object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, 500, 700)
-
+    object.dialog.selectedPortraitName = object.story[object.story_index].alias
     table.insert(sh:curScene().mouseCallbacks, object)
     setmetatable(object, self)
     self.__index = self
@@ -63,8 +63,7 @@ function Story:draw()
 end
 
 function Story:mousepressed(x, y, button)    
-    if button == 1 and self.started == true and self.dialog.str_index > 2 then
-        debug_text = "story mousepressed triggered"
+    if button == 1 and self.started == true and self.dialog.str_index > 2 then        
         local skipped = self.dialog:skipDialog()
         if self.story_index == #(self.story) then
             return true
@@ -74,7 +73,7 @@ function Story:mousepressed(x, y, button)
                     self.story_index = self.story_index + 1
                 end
                 local story = self.story[self.story_index]
-                self.dialog:setNewDialog(story.text) -- add active character potrait here
+                self.dialog:setNewDialog(story.text, story.alias) -- add active character potrait here
             end
             return false
         end
@@ -132,6 +131,7 @@ function Story:setNewStory(path)
     self.started = false
     local story = self.story[self.story_index]
     self.dialog = Dialog:new(self.portaits, story.text, self.font, 20, 500, 700)
+    self.dialog.selectedPortraitName = self.story[self.story_index].alias
 end
 
 function Story:registerCallback(event, callback)
@@ -140,7 +140,7 @@ function Story:registerCallback(event, callback)
             if self.story_index == #(self.story) then
                 for key, value in pairs(self.dialogButtons) do
                     if value ~= nil then value.visible = true end
-                end
+                end            
                 callback(self)
             end
         end

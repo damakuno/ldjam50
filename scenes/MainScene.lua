@@ -8,14 +8,22 @@ local Scene = {
         test_button = Button:new(0, 0, 200, 200, pp, pp_hover)
         
         button_clicked = false
+        button_clicked_outside = false
         test_button.onclick = function(x, y, button)
             button_clicked = true
+            button_clicked_outside = false
+        end
+        test_button.onclickOutside = function(x, y, button)
+            button_clicked = false
+            button_clicked_outside = true
         end
     end,
     draw = function(self)
         -- test_bat:draw(0, 0)
         test_button:draw()
-        if button_clicked == true then love.graphics.print("button clicked", 200, 10) end
+        if button_clicked == true then love.graphics.print("button clicked", 200, 10)
+        else if button_clicked_outside == true then love.graphics.print("button clicked outside", 200, 10) end
+        end
     end,
     update = function(self, dt)
         for i, obj in ipairs(self.updates) do

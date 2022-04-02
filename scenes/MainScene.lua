@@ -23,6 +23,8 @@ local Scene = {
         -- dialog_text = "This is just some dialog, use this test dialog text as you wish. It can be anything really."
         -- dialog = Dialog:new(portraits, dialog_text, font, 20, 500, 700)
 
+        phone = Phone:new()
+
         calendar = Calendar:new()
         calendar:load()
 

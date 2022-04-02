@@ -38,6 +38,12 @@ function Calendar:expandToList()
     -- TODO: return a list of 5? dates
 end
 
+function Calendar:goToNextDay()
+    if curDate < self.numDays then
+        curDate = curDate + 1
+    end
+end
+
 function Calendar:load()
     self:initDayList()
     closedTransform = love.math.newTransform(self.defaultX, self.closedY)
@@ -50,13 +56,14 @@ end
 function Calendar:draw()
     calList = self:expandToList()
     -- draw background if necessary
-    -- TODO check if phone UI is open.
-    -- if open, draw at open position:
-    -- get the position of the (open) calendar from the config
-    love.graphics.print(dayList[curDate], openedTransform)
-    -- if closed draw at closed position:
-    -- get the position of the (closed) calendar from the config
-    love.graphics.print(dayList[curDate], closedTransform)
+
+    -- draw date in appropriate position based on whether phone is opened or closed
+    if phone.isOpened then
+        love.graphics.print(dayList[curDate], openedTransform)
+    else
+        love.graphics.print(dayList[curDate], closedTransform)
+    end
+
     -- draw the 5 dates sequentially with an offset between them
     -- use the visible flag if necessary to hide/show it
 end

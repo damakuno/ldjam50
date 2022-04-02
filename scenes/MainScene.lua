@@ -6,19 +6,43 @@ local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)
-        player = { cash = 0, stress = 30, maxStress = 100, acceptance = 0 }   
+        player = { cash = 0, stress = 30, maxStress = 100, acceptance = 0 }
         setPlayerText()
-        map = Map:new(mapConfig)
+
+        portraits = {}
+        for k, v in pairs(LIP.load("config/Portraits.ini")) do
+            portraits[v.name] = Anime:new(v.name, love.graphics.newImage(v.image), v.width, v.height)
+        end
         
-        -- map button behaviour
-        map.mapButtons["Hospital"].onclick = function(x, y, button)
-            debug_text = player.stress - 5
-            player.stress = (player.stress - 5)
+        map = Map:new(mapConfig)                
+
+        story = Story:new("dialog/hospital_act1", portraits, font)
+        
+        -- status text to display on button hover
+        status_text = ""
+        -- dialog text, and which character is saying them will be set in a file.
+        -- dialog_text = "This is just some dialog, use this test dialog text as you wish. It can be anything really."
+        -- dialog = Dialog:new(portraits, dialog_text, font, 20, 500, 700)
+
+        map.mapButtons["Hospital"].onhover = function()
+            status_text = "Visit your sister at the hospital"
+        end
+
+        map.mapButtons["Hospital"].onclick = function()                            
+            map.mapButtons["Hospital"].visible = false    
             setPlayerText()
+            story:setNewStory("dialog/hospital_act1")
+            story:registerCallback("storyend", function()
+                debug_text = "storyend triggered"
+                map.mapButtons["Hospital"].visible = true
+            end)
+            story:start()
         end
     end,
     draw = function(self)
         map:draw()
+        story:draw()
+        love.graphics.printf(status_text, font, 20, 450, 500)
         love.graphics.print(player_stats_text, 1000, 40)
     end,
     update = function(self, dt)

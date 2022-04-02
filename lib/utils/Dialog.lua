@@ -1,6 +1,6 @@
 local Dialog = {}
 
-function Dialog:new(dialogConfig, text, font, x, y, limit, align, ticks, increment, object)
+function Dialog:new(portaits, text, font, x, y, limit, align, ticks, increment, object)
     object = object or {
         text = text,
         font = font,
@@ -8,18 +8,19 @@ function Dialog:new(dialogConfig, text, font, x, y, limit, align, ticks, increme
         y = y or 500,
         limit = limit or 760,
         align = align or "left",
-        ticks = ticks or 0.3,
+        ticks = ticks or 0.025,
         increment = increment or 1,
         enabled = false,
         counter = 0,
         str_index = 1,
         display_text = "",
-        displaying = true,
+        displaying = false,
+        portraits = {}, -- <- two Anime objects would go here, with positions set in Portraits.ini
         callback = {},
         callbackFlag = {}
     }
     -- TODO: display portraits along with the text, probably have an object store it
-    -- load the portraits from the dialogConfig, and decide from logic which portrait to highlight/display
+    -- load the portraits from the Portraits.ini, and decide from logic which portrait to highlight/display
 
     setmetatable(object, self)
 	table.insert(sh:curScene().updates, object)
@@ -101,6 +102,7 @@ end
 
 function Dialog:start()
     self.enabled = true    
+    self.displaying = true
 end
 
 function Dialog:stop()

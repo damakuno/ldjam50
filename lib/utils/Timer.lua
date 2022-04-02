@@ -13,7 +13,7 @@ function Timer:new(ticks, callback, enabled, object)
         }
     setmetatable(object, self)
     self.__index = self    
-    table.insert(globalUpdates, object)
+    table.insert(sh:curScene().updates, object)
     return object
 end
 

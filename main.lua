@@ -11,14 +11,20 @@ globalMouseCallbacks = {}
 mouse = {x = 0, y = 0, dx = 0, dy = 0, pressed = false}
 
 function love.load()
-
+    love.window.setMode(1280, 720)
+    settings = LIP.load('config/Settings.ini')
+    sh:setScene(1)    
 end
 
 function love.draw()
-
+    sh:curScene():draw()
 end
 
 function love.update(dt)
+    sh:curScene():update(dt)
+    for i, obj in ipairs(globalUpdates) do
+        if obj ~= nil then obj:update(dt) end
+    end
 end
 
 function love.keyreleased(key)
@@ -37,7 +43,7 @@ end
 
 function love.mousepressed(x, y, button)
     if sh:curScene().mousepressed ~= nil then
-        sh:curScene().mousepressed(x, y, button)
+        sh:curScene():mousepressed(x, y, button)
     end
     for i, obj in ipairs(globalMouseCallbacks) do
         if obj ~= nil and obj.mousepressed ~=nil then obj:mousepressed(x, y, button) end

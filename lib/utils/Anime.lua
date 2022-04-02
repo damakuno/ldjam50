@@ -33,7 +33,7 @@ function Anime:new(name, image, width, height, duration, startingSpriteNum, enab
 
     setmetatable(object, self)
     self.__index = self
-	table.insert(globalUpdates, object)
+	table.insert(sh:curScene().updates, object)
     return object
 end
 

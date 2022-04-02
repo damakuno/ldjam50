@@ -7,9 +7,6 @@ function SceneHandler:new(sceneIndex, object)
 		Scenes = {
 			[1] = MainScene			
 		},
-		Timers = {
-			[1] = {}
-		},
 		SceneIndex = 1 or sceneIndex
 	}
     setmetatable(object, self)
@@ -19,7 +16,7 @@ end
 
 function SceneHandler:setScene(numIndex) 
 	self.SceneIndex = numIndex
-	self.Scenes[self.SceneIndex].load()
+	self.Scenes[self.SceneIndex]:load()
 end
 
 function SceneHandler:curScene()

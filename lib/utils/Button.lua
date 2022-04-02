@@ -18,7 +18,7 @@ function Button:new(x, y, width, height, image, hoverImage, object)
     }
     setmetatable(object, self)
     self.__index = self
-    table.insert(globalMouseCallbacks, object)
+    table.insert(sh:curScene().mouseCallbacks, object)
     return object
 end
 

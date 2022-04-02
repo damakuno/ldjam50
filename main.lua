@@ -20,7 +20,7 @@ mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 function love.load()
     debug_text = "debug"
     love.window.setMode(1280, 720)
-    font = love.graphics.newFont("res/fonts/lucon.ttf", 24)
+    font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 24)
     srcBlip = love.audio.newSource("res/audio/blip2.wav", "static")
     mapConfig = LIP.load('config/MapLayout.ini')
     settings = LIP.load('config/Settings.ini')

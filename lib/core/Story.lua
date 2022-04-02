@@ -90,6 +90,11 @@ function Story:reset()
     self.story_index = 1
     self.callback = {}
     self.started = false
+    for key, value in pairs(self.dialogButtons) do
+        if value ~= nil then
+            value:resetCallbacks()
+        end
+    end
     self.dialogButtons = {}
 end
 

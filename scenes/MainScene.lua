@@ -19,10 +19,7 @@ local Scene = {
         story = Story:new("dialog/hospital_act1", portraits, font)        
         -- status text to display on button hover
         status_text = ""
-        -- dialog text, and which character is saying them will be set in a file.
-        -- dialog_text = "This is just some dialog, use this test dialog text as you wish. It can be anything really."
-        -- dialog = Dialog:new(portraits, dialog_text, font, 20, 500, 700)
-
+        
         phone = Phone:new()
 
         calendar = Calendar:new()
@@ -37,17 +34,34 @@ local Scene = {
             map:hide()
             story:setNewStory("dialog/hospital_act1")
             story:registerCallback("storyend", function()
-                debug_text = "hospital storyend triggered"
-                map:show() 
-                setPlayerText()
+                debug_text = "hospital_act1 storyend triggered"                
             end)            
             story.dialogButtons["option1"].onclick = function()
-                debug_text = "option1 clicked"
+                debug_text = "hospital_act1 option1 clicked"
                 story:stop()
+                story:setNewStory("dialog/hospital_act1_1")
+                story:start()
+                story:registerCallback("storyend", function()
+                    debug_text = "hospital_act1_1 storyend triggered"
+                end)
+                story.dialogButtons["option1"].onclick = function()
+                    story:stop()
+                    map:show()
+                end
             end
             story.dialogButtons["option2"].onclick = function()
-                debug_text = "option2 clicked"
+                debug_text = "hospital_act1 option2 clicked"
                 story:stop()
+                story:setNewStory("dialog/hospital_act1_2")
+                story:start()
+                story:registerCallback("storyend", function()
+                    debug_text = "hospital_act1_2 storyend triggered"
+                end)
+                story.dialogButtons["option1"].onclick = function()
+                    debug_text = "hospital_act1_2 storyend option1 clicked"
+                    story:stop()
+                    map:show()
+                end
             end
             story:start()
         end
@@ -75,6 +89,8 @@ local Scene = {
             end
             story:start()
         end
+
+
 
     end,
     draw = function(self)

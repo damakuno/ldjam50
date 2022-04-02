@@ -73,4 +73,11 @@ function Button:draw()
     end
 end
 
+function Button:resetCallbacks()
+    self.onclick = function(x, y, button) end
+    self.onclickOutside = function(x, y, button) end
+    self.onhover = function(x, y, dx, dy, istouch) end
+    self.visible = false
+end
+
 return Button

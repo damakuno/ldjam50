@@ -103,7 +103,7 @@ local Scene = {
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
                     --handle last action, probably different values for certain dates
-                    if curDate == 5 or curDate == 6 then
+                    if curDate == 4 or curDate == 5 or curDate == 6 then
                         player:addCash(25)
                     else
                         player:addCash(50)

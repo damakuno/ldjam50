@@ -3,14 +3,20 @@ local Player = {}
 function Player:new(actions, maxActions, cash, maxCash, stress, maxStress, acceptance, maxAcceptance, object)    
     object = object or {
         actions = actions or 0,
-        maxActions = maxActions or 2,
+        maxActions = maxActions or 2,        
         cash = cash or 0,
         maxCash = maxCash or 9999,
         stress = stress or 0, 
         maxStress = maxStress or 100, 
         acceptance = acceptance or 0,
-        maxAcceptance = maxAcceptance or 100
+        maxAcceptance = maxAcceptance or 100,
+        locationActions = {}
     }
+
+    object.locationActions["Hospital"] = 0
+    object.locationActions["Work"] = 0
+    object.locationActions["Park"] = 0
+
     setmetatable(object, self)
     self.__index = self	
     return object
@@ -74,11 +80,15 @@ function Player:reduceAcceptance(value)
     end
 end
 
-function Player:addActions(value)
+function Player:addActions(type, value)
+    self.locationActions[type] = self.locationActions[type] + value
     self.actions = self.actions + value
 end
 
 function Player:resetActions()
+    for k, v in pairs(self.locationActions) do
+        v = 0
+    end
     self.actions = 0
 end
 

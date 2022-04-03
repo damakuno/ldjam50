@@ -24,7 +24,7 @@ local Scene = {
             status_text = "Visit your sister at the hospital"
         end
         map.mapButtons["Hospital"].onclick = function()
-            player:addActions(1)
+            player:addActions("Hospital", 1)
             status_text = ""
             debug_text = "hospital clicked"
             map:hide()
@@ -33,6 +33,12 @@ local Scene = {
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "hospital_act1 option1 clicked"  
                 player:addAcceptance(10)     
+                --handle last action
+                if player.actions == player.maxActions then
+                    debug_text = "player actions reached "..player.maxActions
+                    player:resetActions()
+                    calendar.currentDate = calendar.currentDate + 1
+                end         
                 story:stop()
                 map:show()
             end            
@@ -45,7 +51,7 @@ local Scene = {
         end
 
         map.mapButtons["Work"].onclick = function()  
-            player:addActions(1)
+            player:addActions("Work", 1)
             status_text = ""               
             debug_text = "work clicked"
             map:hide()
@@ -58,6 +64,7 @@ local Scene = {
                 --handle last action
                 if player.actions == player.maxActions then
                     debug_text = "player actions reached "..player.maxActions
+                    player:resetActions()
                     calendar.currentDate = calendar.currentDate + 1
                 end         
                 story:stop()
@@ -81,6 +88,9 @@ local Scene = {
         love.graphics.print(player_stats_text, 1000, 40)
         love.graphics.print("actions: "..player.actions, 1000, 60)
         love.graphics.print("curDate: "..curDate, 1000, 80)
+        love.graphics.print("Hospital: "..player.locationActions["Hospital"], 1000, 100)
+        love.graphics.print("Work: "..player.locationActions["Work"], 1000, 120)
+        love.graphics.print("Park: "..player.locationActions["Park"], 1000, 140)
     end,
     update = function(self, dt)
         for i, obj in ipairs(self.updates) do

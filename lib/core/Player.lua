@@ -5,9 +5,9 @@ function Player:new(actions, maxActions, cash, maxCash, stress, maxStress, accep
         actions = actions or 0,
         maxActions = maxActions or 2,
         cash = cash or 0,
-        maxCash = maxCash or 66,
+        maxCash = maxCash or 9999,
         stress = stress or 0, 
-        maxStress = maxStress or 30, 
+        maxStress = maxStress or 100, 
         acceptance = acceptance or 0,
         maxAcceptance = maxAcceptance or 100
     }

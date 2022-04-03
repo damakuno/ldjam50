@@ -1,8 +1,7 @@
 local Scene = {
     updates = {},
     mouseCallbacks = {},
-	load = function(self)
-        -- player = { actions = 0, cash = 0, stress = 30, maxStress = 100, acceptance = 0 }        
+	load = function(self)             
         player = Player:new()
         portraits = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
@@ -55,7 +54,7 @@ local Scene = {
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "option1 clicked"
                 player:addCash(50)
-                player:addStress(10)
+                player:addStress(13)
                 --handle last action
                 if player.actions == player.maxActions then
                     debug_text = "player actions reached "..player.maxActions
@@ -66,6 +65,8 @@ local Scene = {
             end
             story:start()
         end
+
+
     end,
     draw = function(self)
         map:draw()

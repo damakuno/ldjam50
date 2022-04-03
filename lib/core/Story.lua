@@ -14,7 +14,13 @@ function Story:new(path, portraits, font, object)
         callback = {},
         background = nil,
         backgroundX = 0,
-        backgroundY = 0
+        backgroundY = 0,
+        dialogEnd = false,
+        dialogArrow = nil,
+        dialogArrowX = 0,
+        dialogArrowY = 0,
+        dialogArrorYOffset = 0,
+        dialogArrowTimer = Timer:new(0.5, function() end, false)
     }
 
     assert(type(object.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')
@@ -45,6 +51,7 @@ function Story:new(path, portraits, font, object)
     end
     file:close()
     
+    
 
     object.background = Anime:new("Dialogue BG", love.graphics.newImage("res/images/ui/ui_dialogue_bg.png"))
     object.backgroundY = love.graphics.getHeight() - object.background.spriteSheet:getHeight()
@@ -52,6 +59,19 @@ function Story:new(path, portraits, font, object)
     local story = object.story[object.story_index]    
     object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, object.backgroundY + 20, object.background.spriteSheet:getWidth() - 20)
     object.dialog.selectedPortraitName = object.story[object.story_index].alias    
+
+    object.dialogArrow = Anime:new("Dialog arrow", love.graphics.newImage("res/images/ui/ui_dialogue_arrow.png"))
+    object.dialogArrowX = 890
+    object.dialogArrowY = 670
+
+    object.dialogArrowTimer:addEvent(0.7, function(timer, ticks, counter, acc)
+        if object.dialogArrorYOffset == 5 then 
+            object.dialogArrorYOffset = 0
+        else
+            object.dialogArrorYOffset = 5
+        end
+    end)
+    object.dialogArrowTimer:start()
 
     sh:curScene().mouseCallbacks["story"] = object
     setmetatable(object, self)
@@ -70,10 +90,14 @@ function Story:draw()
         --TODO add color to the buttons?
         if value ~= nil then value:draw() end
     end
+    if self.dialogEnd == true then
+        self.dialogArrow:draw(self.dialogArrowX, self.dialogArrowY + self.dialogArrorYOffset)
+    end
 end
 
 function Story:mousepressed(x, y, button)
-    if button == 1 and self.started == true and self.dialog.str_index > 2 then        
+    if button == 1 and self.started == true and self.dialog.str_index > 2 then             
+        self.dialogEnd = false
         local skipped = self.dialog:skipDialog()
         if self.story_index == #(self.story) then
             return true
@@ -155,6 +179,7 @@ end
 function Story:registerCallback(event, callback)
     if event == "storyend" then
         local storyEndCallback = function(dialog)
+            self.dialogEnd = true
             if self.story_index == #(self.story) then
                 for key, value in pairs(self.dialogButtons) do
                     if value ~= nil then value.visible = true end

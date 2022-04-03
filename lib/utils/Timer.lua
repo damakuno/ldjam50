@@ -24,7 +24,7 @@ function Timer:update(dt, ...)
         if self.counter >= self.ticks then
             self.counter = self.counter - self.ticks
             self.accumulator = self.accumulator + self.ticks
-            self.callback(self, self.ticks, self.counter, args)
+            self.callback(self, self.ticks, self.counter, self.accumulator, args)
         end
     end
 end

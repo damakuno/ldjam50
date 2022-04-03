@@ -22,7 +22,6 @@ function Dialog:new(portaits, text, font, x, y, limit, align, ticks, increment, 
     }
     -- TODO: display portraits along with the text, probably have an object store it
     -- load the portraits from the Portraits.ini, and decide from logic which portrait to highlight/display
-
     setmetatable(object, self)
 	table.insert(sh:curScene().updates, object)
     self.__index = self

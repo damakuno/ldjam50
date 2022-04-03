@@ -47,7 +47,7 @@ local Scene = {
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
                     --handle last action, probably different stat values for certain dates
-                    player:addAcceptance(10)     
+                    player:addAcceptance(5)
                     if player.actions == player.maxActions then progressDay() end         
                     story:stop()
                     map:show()
@@ -60,7 +60,7 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                         
                         --handle last action for hospital option 1
-                        player:addAcceptance(10)     
+                        player:addAcceptance(5)   
                         if player.actions == player.maxActions then progressDay() end         
                         story:stop()
                         map:show()
@@ -84,14 +84,14 @@ local Scene = {
         end
         
         map.mapButtons["Work"].onhover = function()
-            status_text = "Go to work"
+            status_text = "Go to work to earn money"
         end
 
         map.mapButtons["Work"].onclick = function()              
             player:addActions("Work", 1)
             status_text = ""            
             map:hide()
-            if player:actionCount("Work") == 1 then
+            if player:actionCount("Work") == 1 and not (curDate == 4 and player:actionCount("Hospital") == 1) then
                 story:setNewStory("dialog/work_act"..curDate)      
             else
                 random_choice = randomInt(1, 2)
@@ -117,8 +117,7 @@ local Scene = {
                     story:setNewStory("dialog/work_act"..curDate.."_1")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
-                    story.dialogButtons["option1"].onclick = function()
-                        debug_text = "option1 clicked"  
+                    story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 1
                         player:addCash(50)
                         player:addStress(13)   
@@ -132,11 +131,72 @@ local Scene = {
                     story:setNewStory("dialog/work_act"..curDate.."_2")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
-                    story.dialogButtons["option1"].onclick = function()
-                        debug_text = "work_act option1 clicked"  
+                    story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 2
                         player:addCash(50)
                         player:addStress(13)
+                        if player.actions == player.maxActions then progressDay() end         
+                        story:stop()
+                        map:show()
+                    end
+                end
+            end
+            story:start()
+        end
+
+        map.mapButtons["Park"].onhover = function()
+            status_text = "Go to the park to release stress"
+        end
+        map.mapButtons["Park"].onclick = function()
+            -- don't count as action on day 4 (visit the sister instead)
+            if curDate ~= 4 then player:addActions("Park", 1) end
+            status_text = ""            
+            map:hide()
+            if player:actionCount("Park") == 1 or curDate == 4 then
+                story:setNewStory("dialog/park_act"..curDate)      
+            else
+                random_choice = randomInt(1, 2)
+                debug_text = "random_choice rolled: "..random_choice
+                story:setNewStory("dialog/park_actx"..random_choice)
+            end    
+            story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
+            if story.dialogButtons["option2"] == nil then
+                story.dialogButtons["option1"].onclick = function()                    
+                    --handle last action, probably different values for certain dates                    
+                    -- on day 4, continue shouldn't reduce stress, park is closed
+                    if curDate ~= 4 then 
+                        player:reduceStress(8) 
+                    end
+                    if player.actions == player.maxActions then
+                        debug_text = "player actions reached "..player.maxActions
+                        progressDay()
+                    end
+                    story:stop()
+                    map:show()                    
+                end
+            else
+                story.dialogButtons["option1"].onclick = function()
+                    story:stop()
+                    story:setNewStory("dialog/park_act"..curDate.."_1")
+                    story:start()
+                    story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
+                    story.dialogButtons["option1"].onclick = function()                        
+                        --handle last action for park option 1                  
+                        player:addAcceptance(5)
+                        player:reduceStress(8) 
+                        if player.actions == player.maxActions then progressDay() end         
+                        story:stop()
+                        map:show()
+                    end
+                end  
+                story.dialogButtons["option2"].onclick = function()
+                    story:stop()
+                    story:setNewStory("dialog/park_act"..curDate.."_2")
+                    story:start()
+                    story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
+                    story.dialogButtons["option1"].onclick = function()                        
+                        --handle last action for work option 2             
+                        player:reduceStress(8) 
                         if player.actions == player.maxActions then progressDay() end         
                         story:stop()
                         map:show()

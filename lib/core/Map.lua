@@ -12,7 +12,7 @@ function Map:new(mapConfig, object)
         backgroundY = 0,
         callback = {},
         callbackFlag = {},
-        timer = Timer:new(0.4, function() end, false),
+        timerShow = Timer:new(0.4, function() end, false),
         visible = true
     }
 
@@ -34,9 +34,17 @@ function Map:new(mapConfig, object)
         end
     end
     
-    object.timer:addEvent(0.4, function(tm)
+    object.timerShow:addEvent(0.4, function(tm)
         for key, value in pairs(object.mapButtons) do
-            if value ~= nil then value.visible = true end
+            if value ~= nil then value.visible = true end            
+
+            -- handle hiding of buttons here for special events!
+            -- hide the work button on day 4 for special occasion
+            if curDate == 4 and player:actionCount("Work") == 1 then
+                map.mapButtons["Work"].visible = false
+            else
+                map.mapButtons["Work"].visible = true
+            end
         end        
         tm:stop()
     end)
@@ -53,14 +61,14 @@ end
 function Map:draw()    
     if self.visible == true then
         self.background:draw(self.backgroundX, self.backgroundY)
-    end
-    for key, value in pairs(self.mapButtons) do
-        if value ~= nil then value:draw() end
+    end    
+    for key, value in pairs(self.mapButtons) do        
+        if value ~= nil then value:draw() end        
     end
 end
 
 function Map:show()
-    self.timer:start()
+    self.timerShow:start()
     -- self.visible = true
 end
 

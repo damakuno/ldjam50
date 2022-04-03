@@ -15,7 +15,7 @@ function Button:new(name, x, y, width, height, image, hoverImage, text, font, ob
         hoverImage = hoverImage or image,
         onclick = function(x, y, button) end,
         onclickOutside = function(x, y, button) end,
-        onhover = function(x, y, dx, dy, istouch) end,
+        onhover = function(x, y, dx, dy, istouch) end,        
         isHover = false,        
         visible = true
     }
@@ -52,7 +52,10 @@ function Button:mousepressed(x, y, button)
 end
 
 function Button:mousemoved(x, y, dx, dy, istouch)
-    if self.visible ~= true then return end
+    if self.visible ~= true then 
+        self.isHover = false 
+        return 
+    end
     if self:isWithin(x, y) then        
         self.isHover = true
 		if self.onclick ~= nil then self.onhover(x, y, dx, dy, istouch) end

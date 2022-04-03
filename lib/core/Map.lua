@@ -12,7 +12,7 @@ function Map:new(mapConfig, object)
         backgroundY = 0,
         callback = {},
         callbackFlag = {},
-        timer = Timer:new(0.4, function() end, false),
+        timerShow = Timer:new(0.4, function() end, false),
         visible = true
     }
 
@@ -34,7 +34,7 @@ function Map:new(mapConfig, object)
         end
     end
     
-    object.timer:addEvent(0.4, function(tm)
+    object.timerShow:addEvent(0.4, function(tm)
         for key, value in pairs(object.mapButtons) do
             if value ~= nil then value.visible = true end            
 
@@ -68,7 +68,7 @@ function Map:draw()
 end
 
 function Map:show()
-    self.timer:start()
+    self.timerShow:start()
     -- self.visible = true
 end
 

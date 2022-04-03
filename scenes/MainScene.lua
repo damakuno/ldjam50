@@ -26,7 +26,7 @@ local Scene = {
         calendar:load()
 
         stats = Stats:new()        
-        -- DAY 1 Hospital
+        
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"
         end
@@ -36,7 +36,7 @@ local Scene = {
             debug_text = "hospital clicked"
             map:hide()
             if player:actionCount("Hospital") == 1 then
-                story:setNewStory("dialog/hospital_act1")
+                story:setNewStory("dialog/hospital_act"..curDate)
             else 
                 if curDate >= 4 then
                     story:setNewStory("dialog/hospital_actx2_awake")
@@ -45,21 +45,48 @@ local Scene = {
                 end
             end
             story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
-            story.dialogButtons["option1"].onclick = function()
-                debug_text = "hospital_act1 option1 clicked"  
-                player:addAcceptance(10)     
-                --handle last action
-                if player.actions == player.maxActions then
-                    debug_text = "player actions reached "..player.maxActions
-                    progressDay()
-                end         
-                story:stop()
-                map:show()
-            end            
+            if story.dialogButtons["option2"] == nil then
+                story.dialogButtons["option1"].onclick = function()
+                    debug_text = "hospital_act1 option1 clicked"  
+                    --handle last action
+                    player:addAcceptance(10)     
+                    if player.actions == player.maxActions then progressDay() end         
+                    story:stop()
+                    map:show()
+                end           
+            else
+                story.dialogButtons["option1"].onclick = function()
+                    story:stop()
+                    story:setNewStory("dialog/hospital_act"..curDate.."_1")
+                    story:start()
+                    story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
+                    story.dialogButtons["option1"].onclick = function()
+                        debug_text = "hospital_act1 option1 clicked"  
+                        --handle last action
+                        player:addAcceptance(10)     
+                        if player.actions == player.maxActions then progressDay() end         
+                        story:stop()
+                        map:show()
+                    end
+                end  
+                story.dialogButtons["option2"].onclick = function()
+                    story:stop()
+                    story:setNewStory("dialog/hospital_act"..curDate.."_2")
+                    story:start()
+                    story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
+                    story.dialogButtons["option1"].onclick = function()
+                        debug_text = "hospital_act1 option1 clicked"  
+                        --handle last action
+                        player:reduceStress(5)
+                        if player.actions == player.maxActions then progressDay() end         
+                        story:stop()
+                        map:show()
+                    end
+                end        
+            end
             story:start()
         end
-
-        -- DAY 1 Work
+        
         map.mapButtons["Work"].onhover = function()
             status_text = "Go to work"
         end

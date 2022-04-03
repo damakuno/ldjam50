@@ -92,6 +92,10 @@ function Player:resetActions()
     self.actions = 0
 end
 
+function Player:actionCount(type)
+    return self.locationActions[type]
+end
+
 function Player:draw()
 
 end

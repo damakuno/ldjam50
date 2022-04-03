@@ -35,8 +35,12 @@ local Scene = {
             status_text = ""
             debug_text = "hospital clicked"
             map:hide()
-            story:setNewStory("dialog/hospital_act1")
-            story:registerCallback("storyend", function() debug_text = "hospital_act1 storyend triggered" end)
+            if player:actionCount("Hospital") == 1 then
+                story:setNewStory("dialog/hospital_act1")
+            else 
+                story:setNewStory("dialog/work_act1")
+            end
+            story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "hospital_act1 option1 clicked"  
                 player:addAcceptance(10)     
@@ -61,8 +65,8 @@ local Scene = {
             status_text = ""               
             debug_text = "work clicked"
             map:hide()
-            story:setNewStory("dialog/work_act1")
-            story:registerCallback("storyend", function() debug_text = "work storyend triggered" end)            
+            story:setNewStory("dialog/work_act1")            
+            story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "option1 clicked"
                 player:addCash(50)

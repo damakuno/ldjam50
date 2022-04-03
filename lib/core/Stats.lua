@@ -17,7 +17,7 @@ function Stats:new(object)
             walletBGX = 0,
             walletBGY = 90,
             lineX = 0,
-            lineY = 44,
+            lineY = 32,
             font = love.graphics.newFont("res/fonts/BIZUDGothic-Bold.ttf", 42)
         }
 
@@ -25,7 +25,7 @@ function Stats:new(object)
     object.monitorBGX = love.graphics.getWidth() - object.monitorBG.spriteSheet:getWidth() - object.offsetX
     object.walletBG = Anime:new("Wallet BG", love.graphics.newImage("res/images/ui/ui_wallet_bg.png"))
     object.walletBGX = love.graphics.getWidth() - object.walletBG.spriteSheet:getWidth()
-    for i=1, 5 do
+    for i=1, 6 do
         object.lineSprites[i] = Anime:new("Stress Line "..i, love.graphics.newImage("res/images/ui/ui_stats_line"..i..".png"))
     end
     object.lineX = object.monitorBGX + 47
@@ -45,7 +45,7 @@ function Stats:draw()
 
     -- draw wallet
     self.walletBG:draw(self.walletBGX, self.walletBGY)
-    love.graphics.print("$ " .. player.cash, font, self.walletBGX + 17, self.walletBGY + 90)
+    love.graphics.print("$ " .. player.cash, font, self.walletBGX + 17, self.walletBGY + 90)             
 end
 
 return Stats

@@ -11,6 +11,7 @@ Calendar = require "lib.core.Calendar"
 Story = require "lib.core.Story"
 Phone = require "lib.core.Phone"
 Stats = require "lib.core.Stats"
+Player = require "lib.core.Player"
 
 sh = SceneHandler:new()
 
@@ -22,6 +23,7 @@ function love.load()
     debug_text = "debug"
     love.window.setMode(1280, 720)
     font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 24)
+    dialog_font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 36)
     srcBlip = love.audio.newSource("res/audio/blip2.wav", "static")
     mapConfig = LIP.load('config/MapLayout.ini')
     settings = LIP.load('config/Settings.ini')

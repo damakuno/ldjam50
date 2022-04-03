@@ -1,21 +1,16 @@
-local function setPlayerText()
-    player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance     
-end
-
 local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)
-        player = { cash = 0, stress = 30, maxStress = 100, acceptance = 0 }
-        setPlayerText()
-
+        -- player = { actions = 0, cash = 0, stress = 30, maxStress = 100, acceptance = 0 }        
+        player = Player:new()
         portraits = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
             portraits[v.name] = Anime:new(v.name, love.graphics.newImage(v.image), v.width, v.height)
         end
         
         map = Map:new(mapConfig)
-        story = Story:new("dialog/hospital_act1", portraits, font)        
+        story = Story:new("dialog/hospital_act1", portraits, dialog_font)        
         -- status text to display on button hover
         status_text = ""
         
@@ -30,13 +25,15 @@ local Scene = {
             status_text = "Visit your sister at the hospital"
         end
         map.mapButtons["Hospital"].onclick = function()
+            player:addActions(1)
             status_text = ""
             debug_text = "hospital clicked"
             map:hide()
             story:setNewStory("dialog/hospital_act1")
             story:registerCallback("storyend", function() debug_text = "hospital_act1 storyend triggered" end)
             story.dialogButtons["option1"].onclick = function()
-                debug_text = "hospital_act1 option1 clicked"           
+                debug_text = "hospital_act1 option1 clicked"  
+                player:addAcceptance(10)     
                 story:stop()
                 map:show()
             end            
@@ -49,15 +46,23 @@ local Scene = {
         end
 
         map.mapButtons["Work"].onclick = function()  
+            player:addActions(1)
             status_text = ""               
-            debug_text = "work clicked"                                   
+            debug_text = "work clicked"
             map:hide()
             story:setNewStory("dialog/work_act1")
             story:registerCallback("storyend", function() debug_text = "work storyend triggered" end)            
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "option1 clicked"
-                story:stop()            
-                map:show() 
+                player:addCash(50)
+                player:addStress(10)
+                --handle last action
+                if player.actions == player.maxActions then
+                    debug_text = "player actions reached "..player.maxActions
+                    calendar.currentDate = calendar.currentDate + 1
+                end         
+                story:stop()
+                map:show()
             end
             story:start()
         end
@@ -69,9 +74,12 @@ local Scene = {
         stats:draw()
         calendar:draw()
         love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
-        love.graphics.printf(status_text, font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20) 
+        love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20) 
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 
+        player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance
         love.graphics.print(player_stats_text, 1000, 40)
+        love.graphics.print("actions: "..player.actions, 1000, 60)
+        love.graphics.print("curDate: "..curDate, 1000, 80)
     end,
     update = function(self, dt)
         for i, obj in ipairs(self.updates) do

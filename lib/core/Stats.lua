@@ -42,6 +42,7 @@ function Stats:new(object)
 
     object.indicatorArrows["up_arrow"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow.png"))
     object.indicatorArrows["up_arrow_red"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow_red.png"))
+    object.indicatorArrows["up_arrow_red2"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow_red2.png"))
     object.indicatorArrows["up_arrow2"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow2.png"))
     object.indicatorArrows["down_arrow"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/down_arrow.png"))
     object.indicatorArrows["down_arrow_green"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/down_arrow_green.png"))
@@ -72,8 +73,8 @@ function Stats:draw()
     if hoverButtonName == "Park" then
         self.indicatorArrows["down_arrow_green"]:draw(self.arrowMonitorX, self.arrowMonitorY)
     elseif hoverButtonName == "Work" then
-        self.indicatorArrows["up_arrow"]:draw(self.arrowCashX, self.arrowCashY)
-        self.indicatorArrows["up_arrow_red"]:draw(self.arrowMonitorX, self.arrowMonitorY)
+        self.indicatorArrows["up_arrow2"]:draw(self.arrowCashX, self.arrowCashY)
+        self.indicatorArrows["up_arrow_red2"]:draw(self.arrowMonitorX, self.arrowMonitorY)
     end
     
 end

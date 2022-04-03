@@ -22,7 +22,7 @@ function Map:new(mapConfig, object)
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
                 Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),
-                values.name,
+                "",
                 font
             )
         end

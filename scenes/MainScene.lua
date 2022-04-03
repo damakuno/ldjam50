@@ -14,8 +14,7 @@ local Scene = {
             portraits[v.name] = Anime:new(v.name, love.graphics.newImage(v.image), v.width, v.height)
         end
         
-        map = Map:new(mapConfig)                
-
+        map = Map:new(mapConfig)
         story = Story:new("dialog/hospital_act1", portraits, font)        
         -- status text to display on button hover
         status_text = ""
@@ -105,8 +104,8 @@ local Scene = {
         calendar:draw()
         love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
         love.graphics.printf(status_text, font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20)  
-        love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
         love.graphics.print(player_stats_text, 1000, 40)
+        love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
     end,
     update = function(self, dt)
         for i, obj in ipairs(self.updates) do

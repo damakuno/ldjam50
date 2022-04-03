@@ -15,9 +15,10 @@ function Calendar:new(calendarConfig, object)
             month = "March",
             startDate = 4,
             numDays = 8,
-            defaultX = 1000,
-            closedY = 680,
-            openedY = 360
+            -- default position when phone is closed
+            defaultX = 1025,
+            defaultY = 495,
+            diffY = 244,
         }
 
     setmetatable(object, self)
@@ -46,8 +47,8 @@ end
 
 function Calendar:load()
     self:initDayList()
-    closedTransform = love.math.newTransform(self.defaultX, self.closedY)
-    openedTransform = love.math.newTransform(self.defaultX, self.openedY)
+    closedTransform = love.math.newTransform(self.defaultX, self.defaultY, 0, 2)
+    openedTransform = love.math.newTransform(self.defaultX, self.defaultY - self.diffY, 0, 2)
 end
 
 function Calendar:update(dt)
@@ -59,9 +60,9 @@ function Calendar:draw()
 
     -- draw date in appropriate position based on whether phone is opened or closed
     if phone.isOpened then
-        love.graphics.print(dayList[curDate], openedTransform)
+        love.graphics.print(dayList[curDate], font, openedTransform)
     else
-        love.graphics.print(dayList[curDate], closedTransform)
+        love.graphics.print(dayList[curDate], font, closedTransform)
     end
 
     -- draw the 5 dates sequentially with an offset between them

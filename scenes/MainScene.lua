@@ -8,7 +8,8 @@ end
 local Scene = {
     updates = {},
     mouseCallbacks = {},
-	load = function(self)                      
+	load = function(self)    
+        hoverButtonName = ""                  
         player = Player:new()
         portraits = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
@@ -120,12 +121,12 @@ local Scene = {
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 1
                         player:addCash(50)
-                        player:addStress(13)   
+                        player:addStress(13) 
                         if player.actions == player.maxActions then progressDay() end         
                         story:stop()
                         map:show()
                     end
-                end  
+                end
                 story.dialogButtons["option2"].onclick = function()
                     story:stop()
                     story:setNewStory("dialog/work_act"..curDate.."_2")
@@ -224,6 +225,7 @@ local Scene = {
         love.graphics.print("Hospital: "..player.locationActions["Hospital"], 1000, 100)
         love.graphics.print("Work: "..player.locationActions["Work"], 1000, 120)
         love.graphics.print("Park: "..player.locationActions["Park"], 1000, 140)
+        love.graphics.print("hoverButtonName: "..hoverButtonName, 1000, 160)
     end,
     update = function(self, dt)
         for i, obj in ipairs(self.updates) do
@@ -235,7 +237,17 @@ local Scene = {
             if obj ~= nil and obj.mousepressed ~=nil then obj:mousepressed(x, y, button) end
         end
     end,
-    mousemoved = function(self, x, y, dx, dy, istouch)
+    mousemoved = function(self, x, y, dx, dy, istouch)        
+        if map.mapButtons["Park"].isHover then
+            hoverButtonName = "Park"
+        elseif map.mapButtons["Hospital"].isHover then
+            hoverButtonName = "Hospital"
+        elseif map.mapButtons["Work"].isHover then
+            hoverButtonName = "Work"
+        else
+            hoverButtonName = ""
+        end        
+
         for i, obj in pairs(self.mouseCallbacks) do
             if obj ~= nil and obj.mousemoved ~=nil then obj:mousemoved(x, y, dx, dy, istouch) end
         end

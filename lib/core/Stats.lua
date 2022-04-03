@@ -21,6 +21,7 @@ function Stats:new(object)
             moodImages = {},
             moodX = 0,
             moodY = 130,
+            indicatorArrows = {},
             font = love.graphics.newFont("res/fonts/BIZUDGothic-Bold.ttf", 42)
         }    
 
@@ -39,6 +40,17 @@ function Stats:new(object)
     end
     object.moodX = object.monitorBGX - 50
 
+    object.indicatorArrows["up_arrow"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow.png"))
+    object.indicatorArrows["up_arrow_red"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow_red.png"))
+    object.indicatorArrows["up_arrow2"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/up_arrow2.png"))
+    object.indicatorArrows["down_arrow"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/down_arrow.png"))
+    object.indicatorArrows["down_arrow_green"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/down_arrow_green.png"))
+    object.indicatorArrows["down_arrow2"] = Anime:new("cash_arrow", love.graphics.newImage("res/images/ui/down_arrow2.png"))
+    object.arrowCashX = 1180
+    object.arrowCashY = 170
+    object.arrowMonitorX = 1190
+    object.arrowMonitorY = 0
+
     setmetatable(object, self)
     self.__index = self
     return object
@@ -55,7 +67,15 @@ function Stats:draw()
 
     -- draw wallet
     self.walletBG:draw(self.walletBGX, self.walletBGY)
-    love.graphics.print("$ " .. player.cash, font, self.walletBGX + 17, self.walletBGY + 90)             
+    love.graphics.print("$ " .. player.cash, font, self.walletBGX + 17, self.walletBGY + 90)    
+    
+    if hoverButtonName == "Park" then
+        self.indicatorArrows["down_arrow_green"]:draw(self.arrowMonitorX, self.arrowMonitorY)
+    elseif hoverButtonName == "Work" then
+        self.indicatorArrows["up_arrow"]:draw(self.arrowCashX, self.arrowCashY)
+        self.indicatorArrows["up_arrow_red"]:draw(self.arrowMonitorX, self.arrowMonitorY)
+    end
+    
 end
 
 return Stats

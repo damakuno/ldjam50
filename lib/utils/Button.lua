@@ -15,7 +15,7 @@ function Button:new(name, x, y, width, height, image, hoverImage, text, font, ob
         hoverImage = hoverImage or image,
         onclick = function(x, y, button) end,
         onclickOutside = function(x, y, button) end,
-        onhover = function(x, y, dx, dy, istouch) end,
+        onhover = function(x, y, dx, dy, istouch) end,        
         isHover = false,        
         visible = true
     }

@@ -138,6 +138,7 @@ function Story:stop()
 end
 
 function Story:setNewStory(path)
+    self.path = path
     self.dialogfile = path .. ".dialog"
     self:reset()
     assert(type(self.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')

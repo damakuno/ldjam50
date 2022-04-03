@@ -9,7 +9,8 @@ local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)    
-        hoverButtonName = ""                  
+        hoverButtonName = ""
+        storyType = ""
         player = Player:new()
         portraits = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
@@ -32,6 +33,7 @@ local Scene = {
             status_text = "Visit your sister at the hospital"
         end
         map.mapButtons["Hospital"].onclick = function()
+            storyType = "Hospital"
             player:addActions("Hospital", 1)
             status_text = ""            
             map:hide()
@@ -88,7 +90,8 @@ local Scene = {
             status_text = "Go to work to earn money"
         end
 
-        map.mapButtons["Work"].onclick = function()              
+        map.mapButtons["Work"].onclick = function()    
+            storyType = "Work"          
             player:addActions("Work", 1)
             status_text = ""            
             map:hide()
@@ -160,7 +163,8 @@ local Scene = {
         map.mapButtons["Park"].onhover = function()
             status_text = "Go to the park to release stress"
         end
-        map.mapButtons["Park"].onclick = function()
+        map.mapButtons["Park"].onclick = function() 
+            storyType = "Park"
             -- don't count as action on day 4 (visit the sister instead)
             if curDate ~= 4 then player:addActions("Park", 1) end
             status_text = ""            
@@ -256,6 +260,19 @@ local Scene = {
             hoverButtonName = "Hospital"
         elseif map.mapButtons["Work"].isHover then
             hoverButtonName = "Work"
+        elseif story.dialogButtons["option1"] ~= nil then
+            if story.dialogButtons["option1"].isHover then
+                hoverButtonName = "option1"
+            else
+                hoverButtonName = ""
+            end
+            if story.dialogButtons["option2"] ~= nil then
+                if story.dialogButtons["option2"].isHover then
+                    hoverButtonName = "option2"
+                else
+                    hoverButtonName = ""
+                end
+            end
         else
             hoverButtonName = ""
         end        

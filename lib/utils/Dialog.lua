@@ -39,8 +39,10 @@ function Dialog:update(dt)
     end
 end
 
-function Dialog:draw()
-    love.graphics.printf(self.display_text, self.font, self.x, self.y, self.limit, self.align)
+function Dialog:draw()    
+    love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
+    love.graphics.printf(self.display_text, self.font, self.x, self.y, self.limit, self.align)    
+    love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
     if self.enabled == true then
         local selectedPortrait = portraits[self.selectedPortraitName]        
         if selectedPortrait ~= nill then selectedPortrait:draw(20, 50) end

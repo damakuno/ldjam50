@@ -56,14 +56,14 @@ function Map:show()
     for key, value in pairs(self.mapButtons) do
         if value ~= nil then value.visible = true end
     end
-    self.visible = true
+    -- self.visible = true
 end
 
 function Map:hide()
     for key, value in pairs(self.mapButtons) do          
         if value ~= nil then value.visible = false end
     end
-    self.visible = false
+    -- self.visible = false
 end
 -- use callbacks by calling for example: self.callback["stressMaxed"](some, parameters)
 -- and also set the flag to true if you only want to trigger it once: self.callbackFlag["stressMaxed"] = true

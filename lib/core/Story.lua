@@ -44,13 +44,14 @@ function Story:new(path, portraits, font, object)
         end
     end
     file:close()
-
-    local story = object.story[object.story_index]    
-    object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, 500, 700)
-    object.dialog.selectedPortraitName = object.story[object.story_index].alias    
+    
 
     object.background = Anime:new("Dialogue BG", love.graphics.newImage("res/images/ui/ui_dialogue_bg.png"))
     object.backgroundY = love.graphics.getHeight() - object.background.spriteSheet:getHeight()
+
+    local story = object.story[object.story_index]    
+    object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, object.backgroundY + 20, object.background.spriteSheet:getWidth() - 20)
+    object.dialog.selectedPortraitName = object.story[object.story_index].alias    
 
     sh:curScene().mouseCallbacks["story"] = object
     setmetatable(object, self)
@@ -63,7 +64,7 @@ function Story:update(dt)
 end
 
 function Story:draw()
-    self.background:draw(self.backgroundX, self.backgroundY)
+    self.background:draw(self.backgroundX, self.backgroundY)    
     self.dialog:draw()
     for key, value in pairs(self.dialogButtons) do
         if value ~= nil then value:draw() end
@@ -146,7 +147,7 @@ function Story:setNewStory(path)
 
     self.started = false
     local story = self.story[self.story_index]
-    self.dialog = Dialog:new(self.portaits, story.text, self.font, 20, 500, 700)
+    self.dialog = Dialog:new(self.portraits, story.text, self.font, 20, self.backgroundY + 20, self.background.spriteSheet:getWidth() - 20)    
     self.dialog.selectedPortraitName = self.story[self.story_index].alias
 end
 

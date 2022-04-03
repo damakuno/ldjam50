@@ -30,7 +30,8 @@ end
 
 function love.draw()
     sh:curScene():draw()
-    love.graphics.print(debug_text, 500, 20)
+    love.graphics.print(debug_text, 500, 20)    
+    love.graphics.print("x: "..mouse.x.." y: "..mouse.y, 500, 40)
 end
 
 function love.update(dt)

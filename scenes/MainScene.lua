@@ -32,6 +32,7 @@ local Scene = {
         end
 
         map.mapButtons["Hospital"].onclick = function()
+            status_text = ""
             debug_text = "hospital clicked"
             map:hide()
             story:setNewStory("dialog/hospital_act1")
@@ -72,7 +73,8 @@ local Scene = {
             status_text = "Go to work"
         end
 
-        map.mapButtons["Work"].onclick = function()                 
+        map.mapButtons["Work"].onclick = function()  
+            status_text = ""               
             debug_text = "work clicked"                                   
             map:hide()
             story:setNewStory("dialog/work_act1")
@@ -101,7 +103,9 @@ local Scene = {
         phone:draw()
         stats:draw()
         calendar:draw()
-        love.graphics.printf(status_text, font, 20, 450, 500)
+        love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
+        love.graphics.printf(status_text, font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20)  
+        love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
         love.graphics.print(player_stats_text, 1000, 40)
     end,
     update = function(self, dt)

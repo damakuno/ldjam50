@@ -52,7 +52,10 @@ function Button:mousepressed(x, y, button)
 end
 
 function Button:mousemoved(x, y, dx, dy, istouch)
-    if self.visible ~= true then return end
+    if self.visible ~= true then 
+        self.isHover = false 
+        return 
+    end
     if self:isWithin(x, y) then        
         self.isHover = true
 		if self.onclick ~= nil then self.onhover(x, y, dx, dy, istouch) end

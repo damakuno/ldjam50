@@ -103,7 +103,11 @@ local Scene = {
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
                     --handle last action, probably different values for certain dates
-                    player:addCash(50)
+                    if curDate == 5 or curDate == 6 then
+                        player:addCash(50)
+                    else
+                        player:addCash(25)
+                    end
                     player:addStress(13)                
                     if player.actions == player.maxActions then
                         debug_text = "player actions reached "..player.maxActions
@@ -120,7 +124,11 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 1
-                        player:addCash(50)
+                        if curDate == 5 or curDate == 6 then
+                            player:addCash(50)
+                        else
+                            player:addCash(25)
+                        end
                         player:addStress(13) 
                         if player.actions == player.maxActions then progressDay() end         
                         story:stop()

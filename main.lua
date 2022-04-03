@@ -26,6 +26,7 @@ function love.load()
     dialog_font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 36)
     srcBlip = love.audio.newSource("res/audio/blip2.wav", "static")
     mapConfig = LIP.load('config/MapLayout.ini')
+    mailItemConfig = LIP.load('config/MailItems.ini')
     settings = LIP.load('config/Settings.ini')
     sh:setScene(1)    
 end

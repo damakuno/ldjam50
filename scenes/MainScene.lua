@@ -25,7 +25,8 @@ local Scene = {
         calendar = Calendar:new()
         calendar:load()
 
-        stats = Stats:new()        
+        stats = Stats:new()
+        mail = Mail:new()
         
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"
@@ -126,7 +127,6 @@ local Scene = {
         story:draw()
         phone:draw()
         stats:draw()
-        calendar:draw()
         love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
         love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20) 
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 

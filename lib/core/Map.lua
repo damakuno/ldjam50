@@ -34,11 +34,11 @@ function Map:new(mapConfig, object)
         end
     end
     
-    object.timer:addEvent(0.4, function()
+    object.timer:addEvent(0.4, function(tm)
         for key, value in pairs(object.mapButtons) do
             if value ~= nil then value.visible = true end
         end        
-        object.timer:stop()
+        tm:stop()
     end)
 
     setmetatable(object, self)

@@ -9,7 +9,7 @@ function Timer:new(ticks, callback, enabled, object)
             ticks = ticks or 1,
             counter = 0,
             accumulator = 0,
-            enabled = enabled or true
+            enabled = enabled or false
         }
     setmetatable(object, self)
     self.__index = self    

@@ -24,8 +24,7 @@ local Scene = {
         calendar = Calendar:new()
         calendar:load()
 
-        stats = Stats:new()
-
+        stats = Stats:new()        
         -- DAY 1 Hospital
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"

@@ -12,6 +12,7 @@ function Map:new(mapConfig, object)
         backgroundY = 0,
         callback = {},
         callbackFlag = {},
+        timer = Timer:new(0.4, function() end, false),
         visible = true
     }
 
@@ -33,6 +34,12 @@ function Map:new(mapConfig, object)
         end
     end
     
+    object.timer:addEvent(0.4, function()
+        for key, value in pairs(object.mapButtons) do
+            if value ~= nil then value.visible = true end
+        end        
+        object.timer:stop()
+    end)
 
     setmetatable(object, self)
     self.__index = self	
@@ -53,9 +60,7 @@ function Map:draw()
 end
 
 function Map:show()
-    for key, value in pairs(self.mapButtons) do
-        if value ~= nil then value.visible = true end
-    end
+    self.timer:start()
     -- self.visible = true
 end
 

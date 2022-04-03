@@ -82,5 +82,9 @@ function draws(...)
 end
 
 function randomInt(min, max)
-    return math.floor(math.random() * (max - min) + min)
+    math.randomseed(os.time())
+    math.random()
+    math.random() 
+    math.random()
+    return math.floor(math.random() * (max - min + 1) + min)
 end

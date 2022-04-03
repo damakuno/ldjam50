@@ -57,7 +57,7 @@ function Story:new(path, portraits, font, object)
     object.backgroundY = love.graphics.getHeight() - object.background.spriteSheet:getHeight()
 
     local story = object.story[object.story_index]    
-    object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, object.backgroundY + 20, object.background.spriteSheet:getWidth() - 20)
+    object.dialog = Dialog:new(object.portraits, story.text, object.font, 20, object.backgroundY + 20, object.background.spriteSheet:getWidth() - 100)
     object.dialog.selectedPortraitName = object.story[object.story_index].alias    
 
     object.dialogArrow = Anime:new("Dialog arrow", love.graphics.newImage("res/images/ui/ui_dialogue_arrow.png"))
@@ -172,7 +172,7 @@ function Story:setNewStory(path)
 
     self.started = false
     local story = self.story[self.story_index]
-    self.dialog = Dialog:new(self.portraits, story.text, self.font, 20, self.backgroundY + 20, self.background.spriteSheet:getWidth() - 20)    
+    self.dialog = Dialog:new(self.portraits, story.text, self.font, 20, self.backgroundY + 20, self.background.spriteSheet:getWidth() - 100)    
     self.dialog.selectedPortraitName = self.story[self.story_index].alias
 end
 

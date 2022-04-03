@@ -8,7 +8,7 @@ end
 local Scene = {
     updates = {},
     mouseCallbacks = {},
-	load = function(self)             
+	load = function(self)                      
         player = Player:new()
         portraits = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
@@ -38,7 +38,11 @@ local Scene = {
             if player:actionCount("Hospital") == 1 then
                 story:setNewStory("dialog/hospital_act1")
             else 
-                story:setNewStory("dialog/work_act1")
+                if curDate >= 4 then
+                    story:setNewStory("dialog/hospital_actx2_awake")
+                else
+                    story:setNewStory("dialog/hospital_actx1_comatose")
+                end
             end
             story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
             story.dialogButtons["option1"].onclick = function()
@@ -65,7 +69,13 @@ local Scene = {
             status_text = ""               
             debug_text = "work clicked"
             map:hide()
-            story:setNewStory("dialog/work_act1")            
+            if player:actionCount("Work") == 1 then
+                story:setNewStory("dialog/work_act1")      
+            else
+                random_choice = randomInt(1, 2)
+                debug_text = "random_choice rolled: "..random_choice
+                story:setNewStory("dialog/work_actx"..random_choice)
+            end    
             story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
             story.dialogButtons["option1"].onclick = function()
                 debug_text = "option1 clicked"

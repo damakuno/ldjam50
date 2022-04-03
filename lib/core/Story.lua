@@ -67,6 +67,7 @@ function Story:draw()
     self.background:draw(self.backgroundX, self.backgroundY)    
     self.dialog:draw()
     for key, value in pairs(self.dialogButtons) do
+        --TODO add color to the buttons?
         if value ~= nil then value:draw() end
     end
 end

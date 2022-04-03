@@ -69,7 +69,10 @@ function Button:draw()
         self.image:draw(self.x, self.y)
     end
     if self.text ~=nil then
-        love.graphics.printf(self.text, self.font, self.x + 20, self.y + 10, self.width)
+        --TODO: Add colors to the button text
+        love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
+        love.graphics.printf(self.text, self.font, self.x, self.y + (self.height / 2) - (self.font:getHeight() / 2), self.width, "center")        
+        love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
     end
 end
 

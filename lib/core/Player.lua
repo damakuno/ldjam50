@@ -10,7 +10,8 @@ function Player:new(actions, maxActions, cash, maxCash, stress, maxStress, accep
         maxStress = maxStress or 100, 
         acceptance = acceptance or 0,
         maxAcceptance = maxAcceptance or 100,
-        locationActions = {}
+        locationActions = {},
+        latePaymentStrikes = 0
     }
 
     object.locationActions["Hospital"] = 0

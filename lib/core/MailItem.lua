@@ -24,7 +24,12 @@ function MailItem:new(content, button, object)
 end
 
 function MailItem:openMail()
-    self.isRead = true
+    if not self.isRead then
+        local temp = love.graphics.newImage("res/images/ui/ui_read_mail.png")
+        self.isRead = true
+        self.button.image.spriteSheet = temp
+        self.button.hoverImage.spriteSheet = temp
+    end
     mail.isMailOpen = true
 end
 

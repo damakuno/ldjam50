@@ -3,6 +3,16 @@ function progressDay()
     calendar:goToNextDay()
     -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
+    -- check if player has enough money to pay hospital
+    local bills = 1000  -- dummy constant now. TODO turn into variable cumulative debt?
+    if player.cash < bills then
+        if player.latePaymentStrikes == 0 then
+            mail:SendBillsWarningMail()
+            player.latePaymentStrikes = 1
+        else
+            -- TODO gameover
+        end
+    end
 end
 
 local Scene = {

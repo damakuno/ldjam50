@@ -16,7 +16,7 @@ function Mail:new(mailConfig, object)
             closeButton = nil,
             mailItemInitialY = 334,
             mailItemTitleTransform = love.math.newTransform(972, 348),
-            mailItemContentTransform = love.math.newTransform(972, 380, 0, 0.75),
+            mailItemContentTransform = love.math.newTransform(972, 380, 0, 0.7),
             callback = {},
             callbackFlag = {},
             visible = true,
@@ -62,7 +62,7 @@ function Mail:new(mailConfig, object)
 
     object.openedMailBG = Anime:new("Opened Mail BG", love.graphics.newImage("res/images/ui/ui_mail_bg.png"), 295, 389)
     object.openedMailBGY = love.graphics.getHeight() - object.openedMailBG.spriteSheet:getHeight()
-    object.closeButton = Button:new("Mail close button",1214,347,33,33,Anime:new("Mail close button" .. "img", love.graphics.newImage("res/images/ui/ui_close_mail_button.png"), 33, 33),Anime:new("Mail close button" .. "img_hover",love.graphics.newImage("res/images/ui/ui_close_mail_button.png"),33,33),"",font)
+    object.closeButton = Button:new("Mail close button",1214,297,33,33,Anime:new("Mail close button" .. "img", love.graphics.newImage("res/images/ui/ui_close_mail_button.png"), 33, 33),Anime:new("Mail close button" .. "img_hover",love.graphics.newImage("res/images/ui/ui_close_mail_button.png"),33,33),"",font)
     object.closeButton.onclick = function ()
         object.mailItemList[object.curMailId]:closeMail()
         object.closeButton.visible = false
@@ -76,6 +76,23 @@ function Mail:new(mailConfig, object)
     return object
 end
 
+function Mail:SendBillsWarningMail()
+    local values = self.mailItemList["billwarningtemplate"]
+    local warningName = "billwarning"..curDate
+    self.mailItemList[warningName] = MailItem:new(values.content,values.button)
+        self.mailItemList[warningName].title = values.title
+        self.mailItemList[warningName].daySent = curDate
+        self.mailItemList[warningName].button.text = values.title
+        self.mailItemList[warningName].button.onclick = function ()
+            self.mailItemList[warningName]:openMail()
+            self.curMailId = warningName
+            self.closeButton.visible = true
+            for key, values in pairs(self.mailItemList) do
+                values.button.visible = false
+            end
+        end
+end
+
 function Mail:update(dt)
 end
 
@@ -85,7 +102,7 @@ function Mail:draw()
         -- draw bg
         self.openedMailBG:draw(self.openedMailBGX, self.openedMailBGY)
         love.graphics.print(self.mailItemList[self.curMailId].title, font, self.mailItemTitleTransform)
-        love.graphics.print(self.mailItemList[self.curMailId].content, font, self.mailItemContentTransform)
+        love.graphics.printf(self.mailItemList[self.curMailId].content, font, self.mailItemContentTransform, 380)
         self.closeButton:draw()
     else
         -- draw list of MailItems

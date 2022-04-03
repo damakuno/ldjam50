@@ -184,6 +184,7 @@ function Story:registerCallback(event, callback)
                 for key, value in pairs(self.dialogButtons) do
                     if value ~= nil then value.visible = true end
                 end            
+                self.dialogEnd = false
                 callback(self)
             end
         end

@@ -1,6 +1,7 @@
 function progressDay()
     player:resetActions()
     calendar:goToNextDay()
+    -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
 end
 
@@ -70,7 +71,7 @@ local Scene = {
                 if player.actions == player.maxActions then
                     debug_text = "player actions reached "..player.maxActions
                     progressDay()
-                end         
+                end
                 story:stop()
                 map:show()
             end

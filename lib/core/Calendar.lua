@@ -41,7 +41,8 @@ end
 
 function Calendar:goToNextDay()
     if curDate < self.numDays then
-        curDate = curDate + 1
+        -- curDate = curDate + 1
+        self.currentDate = self.currentDate + 1
     end
 end
 

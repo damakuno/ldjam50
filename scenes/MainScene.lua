@@ -1,3 +1,8 @@
+function progressDay()
+    player:resetActions()
+    calendar.currentDate = calendar.currentDate + 1
+end
+
 local Scene = {
     updates = {},
     mouseCallbacks = {},
@@ -36,8 +41,7 @@ local Scene = {
                 --handle last action
                 if player.actions == player.maxActions then
                     debug_text = "player actions reached "..player.maxActions
-                    player:resetActions()
-                    calendar.currentDate = calendar.currentDate + 1
+                    progressDay()
                 end         
                 story:stop()
                 map:show()
@@ -64,8 +68,7 @@ local Scene = {
                 --handle last action
                 if player.actions == player.maxActions then
                     debug_text = "player actions reached "..player.maxActions
-                    player:resetActions()
-                    calendar.currentDate = calendar.currentDate + 1
+                    progressDay()
                 end         
                 story:stop()
                 map:show()

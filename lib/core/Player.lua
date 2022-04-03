@@ -87,7 +87,7 @@ end
 
 function Player:resetActions()
     for k, v in pairs(self.locationActions) do
-        v = 0
+        self.locationActions[k] = 0
     end
     self.actions = 0
 end

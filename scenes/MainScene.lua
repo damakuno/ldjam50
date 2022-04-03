@@ -1,6 +1,7 @@
 function progressDay()
     player:resetActions()
     calendar.currentDate = calendar.currentDate + 1
+    -- TODO: probably add bills to emails here
 end
 
 local Scene = {

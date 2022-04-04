@@ -6,7 +6,20 @@ function progressDay()
     -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
     -- check if player has enough money to pay hospital
-    if player.cash < bills then
+
+    if curDate == 7 then
+        --TODO: logic for ending
+        if player.acceptance > 30 then
+            debug_text = "acceptance ending"
+            gameEnd(1)
+        else
+            debug_text = "non-acceptance ending"
+            gameEnd(1)
+        end
+    elseif player.stress == 100 then
+        debug_text = "stress ending"
+        gameEnd(1)
+    elseif player.cash < bills then
         if player.latePaymentStrikes == 0 then
             mail:SendBillsWarningMail()
             player.latePaymentStrikes = 1
@@ -89,7 +102,8 @@ local Scene = {
                     --handle last action, probably different stat values for certain dates
                     player:addAcceptance(5)     
                     story:stop()
-                    if player.actions == player.maxActions then progressDay() end    
+                    -- trigger ending if it's day 7 and player visits hospital
+                    if player.actions == player.maxActions or curDate == 7 then progressDay() end    
                     map:show()
                 end
             else

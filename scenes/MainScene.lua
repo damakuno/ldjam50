@@ -6,7 +6,6 @@ function progressDay()
     -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
     -- check if player has enough money to pay hospital
-
     if curDate == 7 then
         --TODO: logic for ending
         if player.acceptance >= 35 then
@@ -52,7 +51,7 @@ end
 local Scene = {        
     updates = {},
     mouseCallbacks = {},
-	load = function(self)
+	load = function(self)        
         triggerFade = false
         timeOfDay = "morning"
         bills = 35
@@ -312,13 +311,16 @@ local Scene = {
         love.graphics.printf("bill: "..bills, font, 1125, 280, 200) 
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 
         player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance
-        love.graphics.print(player_stats_text, 1000, 40)
-        love.graphics.print("actions: "..player.actions, 1000, 60)
-        love.graphics.print("curDate: "..curDate, 1000, 80)
-        love.graphics.print("Hospital: "..player.locationActions["Hospital"], 1000, 100)
-        love.graphics.print("Work: "..player.locationActions["Work"], 1000, 120)
-        love.graphics.print("Park: "..player.locationActions["Park"], 1000, 140)
-        love.graphics.print("hoverButtonName: "..hoverButtonName, 1000, 160)
+        
+        if settings["Misc"].debug == 1 then
+            love.graphics.print(player_stats_text, 1000, 40)
+            love.graphics.print("actions: "..player.actions, 1000, 60)
+            love.graphics.print("curDate: "..curDate, 1000, 80)
+            love.graphics.print("Hospital: "..player.locationActions["Hospital"], 1000, 100)
+            love.graphics.print("Work: "..player.locationActions["Work"], 1000, 120)
+            love.graphics.print("Park: "..player.locationActions["Park"], 1000, 140)
+            love.graphics.print("hoverButtonName: "..hoverButtonName, 1000, 160)
+        end
         love.graphics.setColor(0 / 255, 0 / 255, 0 / 255, fadeAlpha) 
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(),love.graphics.getHeight())
     end,

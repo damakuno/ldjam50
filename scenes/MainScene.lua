@@ -19,14 +19,14 @@ local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)    
-
-
         hoverButtonName = ""
         storyType = ""
         player = Player:new()
         portraits = {}
+        portraitDisplayNames = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
             portraits[v.name] = Anime:new(v.name, love.graphics.newImage(v.image), v.width, v.height)
+            portraitDisplayNames[v.name] = v.displayName
         end
         
         map = Map:new(mapConfig)

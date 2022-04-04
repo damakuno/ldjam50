@@ -11,12 +11,14 @@ function progressDay()
         if player.acceptance >= 35 then
             debug_text = "acceptance best ending"
             gameEnd("ending3_good")
+            audio:playGoodEndBGM()
         elseif player.acceptance < 35 and player.acceptance >= 15 then
             debug_text = "acceptance average ending"
             gameEnd("ending3_average")
         elseif player.acceptance < 15 then
             debug_text = "acceptance low ending"
             gameEnd("ending3_bad")
+            audio:playBadEndBGM()
         end
     elseif player.stress == 100 then
         debug_text = "stress ending"

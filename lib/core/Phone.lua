@@ -43,6 +43,9 @@ function Phone:draw()
             720 - self.background.spriteSheet:getHeight() + self.diffY
         )
     end
+
+    calendar:draw()
+    mail:draw()
 end
 
 return Phone

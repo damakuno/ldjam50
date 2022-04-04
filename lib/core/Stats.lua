@@ -17,7 +17,7 @@ function Stats:new(object)
             walletBGX = 0,
             walletBGY = 90,
             lineX = 0,
-            lineY = 32,
+            lineY = 26,
             moodImages = {},
             moodX = 0,
             moodY = 130,

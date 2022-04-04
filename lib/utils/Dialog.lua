@@ -43,9 +43,12 @@ function Dialog:draw()
     love.graphics.printf(self.display_text, self.font, self.x, self.y, self.limit, self.align)      
     love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
     if self.enabled == true then        
-        love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
-        love.graphics.printf(portraitDisplayNames[self.selectedPortraitName], self.font, self.x, self.y-70, self.limit, self.align)    
-        love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
+        local selectedPortraitDisplayName = portraitDisplayNames[self.selectedPortraitName]
+        if selectedPortraitDisplayName ~= nil then
+            love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
+            love.graphics.printf(selectedPortraitDisplayName, self.font, self.x, self.y-70, self.limit, self.align)    
+            love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
+        end
         local selectedPortrait = portraits[self.selectedPortraitName]        
         if selectedPortrait ~= nill then selectedPortrait:draw(20, 50) end
     end

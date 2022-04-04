@@ -1,5 +1,5 @@
-MC Are you sure?
-MC Last time you...well...
+MC_worried Are you sure?
+MC_worried Last time you...well...
 FM I'm sure brother. 
 FM I've put up a good fight, and so have you, but it's time to call it a day.
 MC Is there anything I can do for you?
@@ -7,9 +7,9 @@ MC You know, before...
 FM Not really.
 FM I had the nurses help me send out some letters, and I've already done what I have to.
 MC Ok.
-MC ...
+MC_worried ...
 FM ...
-MC I'll miss you.
+MC_sad I'll miss you.
 FM And I'll be watching out for you.
-MC Mom and dad would be proud of you.
+MC_talk Mom and dad would be proud of you.
 FM I hope so.

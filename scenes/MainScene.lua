@@ -1,4 +1,6 @@
 function progressDay()
+    fadeAlpha = 1
+    triggerFade = true
     player:resetActions()
     calendar:goToNextDay()
     -- special events can be handled by looking at curDate
@@ -16,7 +18,7 @@ function progressDay()
     else
         player:reduceCash(bills)
     end
-    bills = bills + 5 -- dummy constant now. TODO turn into variable cumulative debt?
+    bills = bills + 10 -- dummy constant now. TODO turn into variable cumulative debt?
 end
 
 function gameEnd(endingNumber)
@@ -36,8 +38,9 @@ local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)
+        triggerFade = false
         timeOfDay = "morning"
-        bills = 25
+        bills = 50
         hoverButtonName = ""
         storyType = ""
         player = Player:new()        
@@ -144,7 +147,7 @@ local Scene = {
                     if curDate == 4 or curDate == 5 or curDate == 6 then
                         player:addCash(25)
                     -- extra pay and stress if option2 selected on day 3
-                    elseif curDate == 3 and player:actionCount("Work") == 2 and day3_option2_selected == true then
+                    elseif curDate == 3 and (player:actionCount("Work") == 2 or player:actionCount("Work") == 3) and day3_option2_selected == true then
                         player:addCash(100)
                         player:addStress(13)
                     else
@@ -268,7 +271,7 @@ local Scene = {
             story:start()
         end
 
-
+        fadeAlpha = 0
     end,
     draw = function(self)
         love.graphics.setBackgroundColor(238 / 255, 238 / 255, 238 / 255, 1)
@@ -289,13 +292,22 @@ local Scene = {
         love.graphics.print("Work: "..player.locationActions["Work"], 1000, 120)
         love.graphics.print("Park: "..player.locationActions["Park"], 1000, 140)
         love.graphics.print("hoverButtonName: "..hoverButtonName, 1000, 160)
+        love.graphics.setColor(0 / 255, 0 / 255, 0 / 255, fadeAlpha) 
+        love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(),love.graphics.getHeight())
     end,
     update = function(self, dt)
+        if triggerFade == true then
+            fadeAlpha = fadeAlpha - dt
+            if fadeAlpha < 0 then
+                triggerFade = false
+            end
+        end
         for i, obj in ipairs(self.updates) do
             if obj ~= nil then obj:update(dt) end
         end
     end,
     mousepressed = function(self, x, y, button)
+        if triggerFade == true then return end
         for i, obj in pairs(self.mouseCallbacks) do
             if obj ~= nil and obj.mousepressed ~=nil then obj:mousepressed(x, y, button) end
         end

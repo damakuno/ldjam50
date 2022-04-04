@@ -40,7 +40,7 @@ function Map:new(mapConfig, object)
                 if value ~= nil then value.visible = true end
                 -- handle hiding of buttons here for special events!
                 -- hide the hospital and park button if work option2 selected on day 3 (not sure if hiding them is necessary or we give the player the option)
-                if curDate == 3 and player:actionCount("Work") == 1 and day3_option2_selected == true then
+                if curDate == 3 and (player:actionCount("Work") == 1 or player:actionCount("Work") == 2) and day3_option2_selected == true then
                     map.mapButtons["Hospital"].visible = false
                     map.mapButtons["Park"].visible = false
                 end

@@ -24,6 +24,7 @@ function MailItem:new(content, button, object)
 end
 
 function MailItem:openMail()
+    audio:playOpenMail()
     if not self.isRead then
         local temp = love.graphics.newImage("res/images/ui/ui_read_mail.png")
         self.isRead = true

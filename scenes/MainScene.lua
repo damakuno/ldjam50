@@ -32,6 +32,7 @@ function progressDay()
         player:reduceCash(bills)
     end
     bills = bills + 5 -- dummy constant now. TODO turn into variable cumulative debt?
+    mail:playNotifSoundIfAny()
 end
 
 function gameEnd(endingNumber)
@@ -39,9 +40,11 @@ function gameEnd(endingNumber)
     storyType = "Ending"
     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
     story.dialogButtons["option1"].onclick = function()
+        audio:playOptionClick()
         love.event.quit("restart")
     end
     story.dialogButtons["option2"].onclick = function()  
+        audio:playOptionClick()
         love.event.quit(0)
     end
     story:start()
@@ -71,6 +74,8 @@ local Scene = {
         -- status text to display on button hover
         status_text = ""
         
+        audio = Audio:new()
+        audio:playDefaultBGM()
         phone = Phone:new()
 
         calendar = Calendar:new()
@@ -78,11 +83,15 @@ local Scene = {
 
         stats = Stats:new()
         mail = Mail:new()
+        mail:playNotifSoundIfAny()
         
         map.mapButtons["Hospital"].onhover = function()
             status_text = "Visit your sister at the hospital"
         end
         map.mapButtons["Hospital"].onclick = function()
+            -- play sound
+                audio:playLocationClickSFX()
+            -- set story
             storyType = "Hospital"
             player:addActions("Hospital", 1)
             status_text = ""            
@@ -98,7 +107,8 @@ local Scene = {
             end
             story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
             if story.dialogButtons["option2"] == nil then
-                story.dialogButtons["option1"].onclick = function()                    
+                story.dialogButtons["option1"].onclick = function()  
+                    audio:playOptionClick()                  
                     --handle last action, probably different stat values for certain dates
                     player:addAcceptance(5)     
                     story:stop()
@@ -108,11 +118,13 @@ local Scene = {
                 end
             else
                 story.dialogButtons["option1"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/hospital_act"..curDate.."_1")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                         
+                        audio:playOptionClick()
                         --handle last action for hospital option 1
                         player:addAcceptance(5)         
                         story:stop()
@@ -121,11 +133,13 @@ local Scene = {
                     end
                 end  
                 story.dialogButtons["option2"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/hospital_act"..curDate.."_2")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
+                        audio:playOptionClick()
                         --handle last action for hospital option 2
                         player:reduceStress(5)    
                         story:stop()
@@ -143,6 +157,7 @@ local Scene = {
 
         day3_option2_selected = false
         map.mapButtons["Work"].onclick = function()    
+            audio:playLocationClickSFX()
             storyType = "Work"          
             player:addActions("Work", 1)
             status_text = ""            
@@ -157,6 +172,7 @@ local Scene = {
             story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
+                    audio:playOptionClick()
                     --handle last action, probably different values for certain dates
                     if curDate == 4 or curDate == 5 or curDate == 6 then
                         player:addCash(25)
@@ -177,11 +193,13 @@ local Scene = {
                 end
             else
                 story.dialogButtons["option1"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/work_act"..curDate.."_1")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
+                        audio:playOptionClick()
                         --handle last action for work option 1
                         if curDate == 5 or curDate == 6 then
                             player:addCash(25)
@@ -195,11 +213,13 @@ local Scene = {
                     end
                 end
                 story.dialogButtons["option2"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/work_act"..curDate.."_2")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
+                        audio:playOptionClick()
                         --handle last action for work option 2
                         -- half pay for days 5,6
                         if curDate == 5 or curDate == 6 then
@@ -226,6 +246,7 @@ local Scene = {
             status_text = "Go to the park to release stress"
         end
         map.mapButtons["Park"].onclick = function() 
+            audio:playLocationClickSFX()
             storyType = "Park"
             -- don't count as action on day 4 (visit the sister instead)
             if curDate ~= 4 then player:addActions("Park", 1) end
@@ -241,6 +262,7 @@ local Scene = {
             story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
+                    audio:playOptionClick()
                     --handle last action, probably different values for certain dates                    
                     -- on day 4, continue shouldn't reduce stress, park is closed
                     if curDate ~= 4 then 
@@ -255,11 +277,13 @@ local Scene = {
                 end
             else
                 story.dialogButtons["option1"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/park_act"..curDate.."_1")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
+                        audio:playOptionClick()
                         --handle last action for park option 1                  
                         player:addAcceptance(5)
                         player:reduceStress(8)         
@@ -269,11 +293,13 @@ local Scene = {
                     end
                 end  
                 story.dialogButtons["option2"].onclick = function()
+                    audio:playOptionClick()
                     story:stop()
                     story:setNewStory("dialog/park_act"..curDate.."_2")
                     story:start()
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
+                        audio:playOptionClick()
                         --handle last action for work option 2             
                         player:reduceStress(8)     
                         story:stop()

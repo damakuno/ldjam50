@@ -35,21 +35,23 @@ function Map:new(mapConfig, object)
     end
     
     object.timerShow:addEvent(0.4, function(tm)
-        for key, value in pairs(object.mapButtons) do
-            if value ~= nil then value.visible = true end
-            -- handle hiding of buttons here for special events!
-            -- hide the hospital and park button if work option2 selected on day 3 (not sure if hiding them is necessary or we give the player the option)
-            if curDate == 3 and player:actionCount("Work") == 1 and day3_option2_selected == true then
-                map.mapButtons["Hospital"].visible = false
-                map.mapButtons["Park"].visible = false
-            end
-            -- hide the work button on day 4 for special occasion
-            if curDate == 4 and player:actionCount("Work") == 1 then
-                map.mapButtons["Work"].visible = false
-            else
-                map.mapButtons["Work"].visible = true
-            end
-        end        
+        if storyType ~= "Ending" then
+            for key, value in pairs(object.mapButtons) do
+                if value ~= nil then value.visible = true end
+                -- handle hiding of buttons here for special events!
+                -- hide the hospital and park button if work option2 selected on day 3 (not sure if hiding them is necessary or we give the player the option)
+                if curDate == 3 and player:actionCount("Work") == 1 and day3_option2_selected == true then
+                    map.mapButtons["Hospital"].visible = false
+                    map.mapButtons["Park"].visible = false
+                end
+                -- hide the work button on day 4 for special occasion
+                if curDate == 4 and player:actionCount("Work") == 1 then
+                    map.mapButtons["Work"].visible = false
+                else
+                    map.mapButtons["Work"].visible = true
+                end
+            end        
+        end
         tm:stop()
     end)
 

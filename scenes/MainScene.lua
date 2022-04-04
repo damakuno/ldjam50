@@ -10,9 +10,24 @@ function progressDay()
             mail:SendBillsWarningMail()
             player.latePaymentStrikes = 1
         else
+            debug_text = "gameEnd trigger"
             -- TODO gameover
+            gameEnd(1)
         end
     end
+end
+
+function gameEnd(endingNumber)
+    story:setNewStory("dialog/endings/ending"..endingNumber)
+    storyType = "Ending"
+    story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
+    story.dialogButtons["option1"].onclick = function()
+        love.event.quit("restart")
+    end
+    story.dialogButtons["option2"].onclick = function()  
+        love.event.quit(0)
+    end
+    story:start()
 end
 
 local Scene = {
@@ -65,9 +80,9 @@ local Scene = {
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
                     --handle last action, probably different stat values for certain dates
-                    player:addAcceptance(5)
-                    if player.actions == player.maxActions then progressDay() end         
+                    player:addAcceptance(5)     
                     story:stop()
+                    if player.actions == player.maxActions then progressDay() end    
                     map:show()
                 end
             else
@@ -78,9 +93,9 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                         
                         --handle last action for hospital option 1
-                        player:addAcceptance(5)   
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:addAcceptance(5)         
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end   
                         map:show()
                     end
                 end  
@@ -91,9 +106,9 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for hospital option 2
-                        player:reduceStress(5)
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:reduceStress(5)    
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end     
                         map:show()
                     end
                 end        
@@ -131,12 +146,12 @@ local Scene = {
                     else
                         player:addCash(50)
                     end
-                    player:addStress(13)                
+                    player:addStress(13)      
+                    story:stop()          
                     if player.actions == player.maxActions then
                         debug_text = "player actions reached "..player.maxActions
                         progressDay()
                     end
-                    story:stop()
                     map:show()                    
                 end
             else
@@ -152,9 +167,9 @@ local Scene = {
                         else
                             player:addCash(50)
                         end
-                        player:addStress(13) 
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:addStress(13)      
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end    
                         map:show()
                     end
                 end
@@ -176,9 +191,9 @@ local Scene = {
                         else
                             player:addCash(50)
                         end
-                        player:addStress(13)
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:addStress(13)    
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end     
                         map:show()
                     end
                 end
@@ -210,11 +225,11 @@ local Scene = {
                     if curDate ~= 4 then 
                         player:reduceStress(8) 
                     end
+                    story:stop()
                     if player.actions == player.maxActions then
                         debug_text = "player actions reached "..player.maxActions
                         progressDay()
                     end
-                    story:stop()
                     map:show()                    
                 end
             else
@@ -226,9 +241,9 @@ local Scene = {
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for park option 1                  
                         player:addAcceptance(5)
-                        player:reduceStress(8) 
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:reduceStress(8)         
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end 
                         map:show()
                     end
                 end  
@@ -239,9 +254,9 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 2             
-                        player:reduceStress(8) 
-                        if player.actions == player.maxActions then progressDay() end         
+                        player:reduceStress(8)     
                         story:stop()
+                        if player.actions == player.maxActions then progressDay() end     
                         map:show()
                     end
                 end

@@ -3,7 +3,7 @@ local Player = {}
 function Player:new(actions, maxActions, cash, maxCash, stress, maxStress, acceptance, maxAcceptance, object)    
     object = object or {
         actions = actions or 0,
-        maxActions = maxActions or 2,        
+        maxActions = maxActions or 3,        
         cash = cash or 0,
         maxCash = maxCash or 9999,
         stress = stress or 0, 

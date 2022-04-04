@@ -4,7 +4,6 @@ function progressDay()
     -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
     -- check if player has enough money to pay hospital
-    local bills = 100  -- dummy constant now. TODO turn into variable cumulative debt?
     if player.cash < bills then
         if player.latePaymentStrikes == 0 then
             mail:SendBillsWarningMail()
@@ -14,7 +13,10 @@ function progressDay()
             -- TODO gameover
             gameEnd(1)
         end
+    else
+        player:reduceCash(bills)
     end
+    bills = bills + 5 -- dummy constant now. TODO turn into variable cumulative debt?
 end
 
 function gameEnd(endingNumber)
@@ -30,10 +32,12 @@ function gameEnd(endingNumber)
     story:start()
 end
 
-local Scene = {
+local Scene = {        
     updates = {},
     mouseCallbacks = {},
-	load = function(self)    
+	load = function(self)
+        timeOfDay = "morning"
+        bills = 25
         hoverButtonName = ""
         storyType = ""
         player = Player:new()        
@@ -274,6 +278,8 @@ local Scene = {
         stats:draw()
         love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
         love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20) 
+        love.graphics.printf("hospital bill: "..bills, font, 740, 20, 200)        
+        love.graphics.printf(timeOfDay, font, 820, 480, 200)
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 
         player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance
         love.graphics.print(player_stats_text, 1000, 40)

@@ -73,7 +73,14 @@ function Map:draw()
     end
 end
 
-function Map:show()
+function Map:show()    
+    if player.actions == 0 then 
+        timeOfDay = "morning"
+    elseif player.actions == 1 then
+        timeOfDay = "afternoon"            
+    else
+        timeOfDay = "evening"
+    end
     self.timerShow:start()
     -- self.visible = true
 end

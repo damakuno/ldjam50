@@ -1,10 +1,10 @@
-MC This can't be happening...
+MC_worried This can't be happening...
 boss Look I'm not happy about it either but...
-MC You got anything else boss? Otherwise I'm out.
-MC (This is such a waste of time).
+MC_sad You got anything else boss? Otherwise I'm out.
+MC_sad (This is such a waste of time).
 boss Yeah, hold your horses.
 boss I do have something, if you're interested.
-MC This one better be worth it boss. 
-MC You know why I need the money.
+MC_worried This one better be worth it boss. 
+MC_worried You know why I need the money.
 boss Yeah, I guarantee this one is legit.
 boss So, you in?

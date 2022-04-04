@@ -1,11 +1,11 @@
 MC (Talks on phone)
 MC ...
-MC She is? Ok, I'm on the way.
+MC_happy She is? Ok, I'm on the way.
 boss Oi! Where do you think you're going?
 boss The job's not finished yet!
-MC Sorry boss, I gotta get to the hospital. My sister's awake.
+MC_talk Sorry boss, I gotta get to the hospital. My sister's awake.
 boss ...
 boss Sighs
 boss Fine. Go. I'll pay you for what you've done so far.
-MC Thanks boss.
+MC_happy Thanks boss.
 boss Mmhmm. Give her my regards.

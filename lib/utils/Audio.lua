@@ -32,51 +32,51 @@ end
 
 function Audio:playDefaultBGM()
     self:stopAllBGM()
-    self.srcDefaultBGM:setVolume(0.35)
+    self.srcDefaultBGM:setVolume(0.35 * settings["Sound"].masterVolume * settings["Sound"].musicVolume)
     self.srcDefaultBGM:setLooping(true)
     self.srcDefaultBGM:play()
 end
 
 function Audio:playGoodEndBGM()
     self:stopAllBGM()
-    self.srcGoodEndBGM:setVolume(0.35)
+    self.srcGoodEndBGM:setVolume(0.35 * settings["Sound"].masterVolume * settings["Sound"].musicVolume)
     self.srcGoodEndBGM:setLooping(true)
     self.srcGoodEndBGM:play()
 end
 
 function Audio:playBadEndBGM()
     self:stopAllBGM()
-    self.srcBadEndBGM:setVolume(0.35)
+    self.srcBadEndBGM:setVolume(0.35 * settings["Sound"].masterVolume * settings["Sound"].musicVolume)
     self.srcBadEndBGM:setLooping(true)
     self.srcBadEndBGM:play()
 end
 
 function Audio:playLocationClickSFX()
-    self.srcLocation:setVolume(0.2)
+    self.srcLocation:setVolume(0.2 * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
     self.srcLocation:setLooping(false)
     self.srcLocation:play()
 end
 
 function Audio:playNotifSFX()
-    self.srcNotif:setVolume(0.2)
+    self.srcNotif:setVolume(0.2 * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
     self.srcNotif:setLooping(false)
     self.srcNotif:play()
 end
 
 function Audio:playDialogueClick()
-    self.srcDialogueClick:setVolume(0.2)
+    self.srcDialogueClick:setVolume(0.2 * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
     self.srcDialogueClick:setLooping(false)
     self.srcDialogueClick:play()
 end
 
 function Audio:playOptionClick()
-    self.srcOption:setVolume(0.2)
+    self.srcOption:setVolume(0.2 * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
     self.srcOption:setLooping(false)
     self.srcOption:play()
 end
 
 function Audio:playOpenMail()
-    self.srcOpenMail:setVolume(0.2)
+    self.srcOpenMail:setVolume(0.2 * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
     self.srcOpenMail:setLooping(false)
     self.srcOpenMail:play()
 end

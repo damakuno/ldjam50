@@ -81,7 +81,7 @@ function Dialog:updateDialogText()
             [5] = 1.04
         }
         srcBlip:setPitch(pitches[randomInt(1, 5)])
-        srcBlip:setVolume(0.1)
+        srcBlip:setVolume(0.5)
         srcBlip:play()
 
         if string.sub(self.display_text, -1) == " " then

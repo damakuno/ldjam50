@@ -93,6 +93,16 @@ function Mail:SendBillsWarningMail()
         end
 end
 
+function Mail:playNotifSoundIfAny()
+    for key, values in pairs(self.mailItemList) do
+        -- i am desperate pls forgib bad code
+        if calendar.currentDate == values.daySent then
+            audio:playNotifSFX()
+            return
+        end
+    end
+end
+
 function Mail:update(dt)
 end
 

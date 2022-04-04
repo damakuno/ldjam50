@@ -12,6 +12,7 @@ Story = require "lib.core.Story"
 Phone = require "lib.core.Phone"
 Stats = require "lib.core.Stats"
 Player = require "lib.core.Player"
+Audio = require "lib.utils.Audio"
 
 sh = SceneHandler:new()
 

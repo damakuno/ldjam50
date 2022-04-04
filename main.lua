@@ -20,6 +20,7 @@ globalMouseCallbacks = {}
 mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 
 function love.load()
+    love.window.setTitle("The March to heaven")
     debug_text = "debug"
     love.window.setMode(1280, 720)
     font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 24)
@@ -34,8 +35,10 @@ end
 function love.draw()
     sh:curScene():draw()
     love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
-    love.graphics.print(debug_text, 500, 20)    
-    love.graphics.print("x: "..mouse.x.." y: "..mouse.y, 500, 40)
+    if settings["Misc"].debug == 1 then
+        love.graphics.print(debug_text, 500, 20)    
+        love.graphics.print("x: "..mouse.x.." y: "..mouse.y, 500, 40)
+    end
     love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
 end
 

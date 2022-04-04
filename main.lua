@@ -20,6 +20,7 @@ globalMouseCallbacks = {}
 mouse = { x = 0, y = 0, dx = 0, dy = 0, pressed = false }
 
 function love.load()
+    love.window.setTitle("The March to heaven")
     debug_text = "debug"
     love.window.setMode(1280, 720)
     font = love.graphics.newFont("res/fonts/Pangolin-Regular.ttf", 24)

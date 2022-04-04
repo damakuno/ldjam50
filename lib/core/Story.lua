@@ -20,7 +20,8 @@ function Story:new(path, portraits, font, object)
         dialogArrowX = 0,
         dialogArrowY = 0,
         dialogArrorYOffset = 0,
-        dialogArrowTimer = Timer:new(0.5, function() end, false)
+        dialogArrowTimer = Timer:new(0.5, function() end, false),
+        timerShow = Timer:new(0.4, function() end, false)
     }
 
     assert(type(object.dialogfile) == "string", 'Parameter "dialogfile" must be a string.')
@@ -72,6 +73,13 @@ function Story:new(path, portraits, font, object)
         end
     end)
     object.dialogArrowTimer:start()
+
+    object.timerShow:addEvent(0.4, function(tm)
+        for key, value in pairs(object.dialogButtons) do
+            if value ~= nil then value.visible = true end
+        end 
+        tm:stop()
+    end)
 
     sh:curScene().mouseCallbacks["story"] = object
     setmetatable(object, self)
@@ -182,9 +190,10 @@ function Story:registerCallback(event, callback)
         local storyEndCallback = function(dialog)
             self.dialogEnd = true
             if self.story_index == #(self.story) then
-                for key, value in pairs(self.dialogButtons) do
-                    if value ~= nil then value.visible = true end
-                end            
+                self.timerShow:start()
+                -- for key, value in pairs(self.dialogButtons) do
+                --     if value ~= nil then value.visible = true end
+                -- end            
                 self.dialogEnd = false
                 callback(self)
             end

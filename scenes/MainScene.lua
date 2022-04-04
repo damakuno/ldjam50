@@ -9,24 +9,26 @@ function progressDay()
 
     if curDate == 7 then
         --TODO: logic for ending
-        if player.acceptance > 30 then
-            debug_text = "acceptance ending"
-            gameEnd(1)
-        else
-            debug_text = "non-acceptance ending"
-            gameEnd(1)
+        if player.acceptance >= 35 then
+            debug_text = "acceptance best ending"
+            gameEnd("ending3_good")
+        elseif player.acceptance < 35 and player.acceptance >= 15 then
+            debug_text = "acceptance average ending"
+            gameEnd("ending3_average")
+        elseif player.acceptance < 15 then
+            debug_text = "acceptance low ending"
+            gameEnd("ending3_bad")
         end
     elseif player.stress == 100 then
         debug_text = "stress ending"
-        gameEnd(1)
+        gameEnd("ending2")
     elseif player.cash < bills then
         if player.latePaymentStrikes == 0 then
             mail:SendBillsWarningMail()
             player.latePaymentStrikes = 1
         else
-            debug_text = "gameEnd trigger"
-            -- TODO gameover
-            gameEnd(1)
+            debug_text = "gameEnd trigger"            
+            gameEnd("ending1")
         end
     else
         player:reduceCash(bills)
@@ -34,8 +36,8 @@ function progressDay()
     bills = bills + 5 -- dummy constant now. TODO turn into variable cumulative debt?
 end
 
-function gameEnd(endingNumber)
-    story:setNewStory("dialog/endings/ending"..endingNumber)
+function gameEnd(ending)
+    story:setNewStory("dialog/endings/"..ending)
     storyType = "Ending"
     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
     story.dialogButtons["option1"].onclick = function()
@@ -99,11 +101,11 @@ local Scene = {
             story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
+                    debug_text = "hopsital option 1 clicked"
                     --handle last action, probably different stat values for certain dates
-                    player:addAcceptance(5)     
+                    player:addAcceptance(7)     
                     story:stop()
-                    -- trigger ending if it's day 7 and player visits hospital
-                    if player.actions == player.maxActions or curDate == 7 then progressDay() end    
+                    if player.actions == player.maxActions then progressDay() end    
                     map:show()
                 end
             else
@@ -114,9 +116,14 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                         
                         --handle last action for hospital option 1
-                        player:addAcceptance(5)         
+                        player:addAcceptance(7)         
                         story:stop()
-                        if player.actions == player.maxActions then progressDay() end   
+                        if player.actions == player.maxActions then 
+                            progressDay()                                                      
+                        -- trigger ending if it's day 7 and player visits hospital                    
+                        elseif curDate == 7 then
+                            progressDay()
+                        end   
                         map:show()
                     end
                 end  
@@ -129,7 +136,12 @@ local Scene = {
                         --handle last action for hospital option 2
                         player:reduceStress(5)    
                         story:stop()
-                        if player.actions == player.maxActions then progressDay() end     
+                        if player.actions == player.maxActions then
+                            progressDay()                             
+                        -- trigger ending if it's day 7 and player visits hospital                    
+                        elseif curDate == 7 then
+                            progressDay()
+                        end     
                         map:show()
                     end
                 end        
@@ -162,8 +174,8 @@ local Scene = {
                         player:addCash(25)
                     -- extra pay and stress if option2 selected on day 3
                     elseif curDate == 3 and (player:actionCount("Work") == 2 or player:actionCount("Work") == 3) and day3_option2_selected == true then
-                        player:addCash(100)
-                        player:addStress(13)
+                        player:addCash(70)
+                        player:addStress(5)
                     else
                         player:addCash(50)
                     end
@@ -207,8 +219,8 @@ local Scene = {
                         -- extra pay and stress if option2 selected on day 3
                         elseif curDate == 3 then
                             day3_option2_selected = true
-                            player:addCash(100)
-                            player:addStress(13)
+                            player:addCash(70)
+                            player:addStress(5)
                         else
                             player:addCash(50)
                         end

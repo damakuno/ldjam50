@@ -19,6 +19,8 @@ local Scene = {
     updates = {},
     mouseCallbacks = {},
 	load = function(self)    
+
+
         hoverButtonName = ""
         storyType = ""
         player = Player:new()
@@ -101,6 +103,7 @@ local Scene = {
             status_text = "Go to work to earn money"
         end
 
+        day3_option2_selected = false
         map.mapButtons["Work"].onclick = function()    
             storyType = "Work"          
             player:addActions("Work", 1)
@@ -119,6 +122,10 @@ local Scene = {
                     --handle last action, probably different values for certain dates
                     if curDate == 4 or curDate == 5 or curDate == 6 then
                         player:addCash(25)
+                    -- extra pay and stress if option2 selected on day 3
+                    elseif curDate == 3 and player:actionCount("Work") == 2 and day3_option2_selected == true then
+                        player:addCash(100)
+                        player:addStress(13)
                     else
                         player:addCash(50)
                     end
@@ -156,8 +163,14 @@ local Scene = {
                     story:registerCallback("storyend", function() debug_text = story.path.." storyend triggered" end)                    
                     story.dialogButtons["option1"].onclick = function()                        
                         --handle last action for work option 2
+                        -- half pay for days 5,6
                         if curDate == 5 or curDate == 6 then
                             player:addCash(25)
+                        -- extra pay and stress if option2 selected on day 3
+                        elseif curDate == 3 then
+                            day3_option2_selected = true
+                            player:addCash(100)
+                            player:addStress(13)
                         else
                             player:addCash(50)
                         end

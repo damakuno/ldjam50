@@ -75,8 +75,11 @@ function Stats:draw()
     elseif hoverButtonName == "Work" then
         self.indicatorArrows["up_arrow2"]:draw(self.arrowCashX, self.arrowCashY)
         self.indicatorArrows["up_arrow_red2"]:draw(self.arrowMonitorX, self.arrowMonitorY)
+    elseif hoverButtonName == "option2" and curDate == 3 and storyType == "Work" then
+        self.indicatorArrows["up_arrow2"]:draw(self.arrowCashX, self.arrowCashY)
+        self.indicatorArrows["up_arrow_red2"]:draw(self.arrowMonitorX, self.arrowMonitorY)
     elseif hoverButtonName == "option2" and storyType == "Hospital" then
-        self.indicatorArrows["down_arrow_green"]:draw(self.arrowMonitorX, self.arrowMonitorY)
+        self.indicatorArrows["down_arrow_green"]:draw(self.arrowMonitorX, self.arrowMonitorY)    
     end
     
 end

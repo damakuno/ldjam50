@@ -38,13 +38,14 @@ function Dialog:update(dt)
     end
 end
 
-function Dialog:draw()    
+function Dialog:draw()
     love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
     love.graphics.printf(self.display_text, self.font, self.x, self.y, self.limit, self.align)      
     love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
     if self.enabled == true then        
         local selectedPortraitDisplayName = portraitDisplayNames[self.selectedPortraitName]
         if selectedPortraitDisplayName ~= nil then
+            -- love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
             love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
             love.graphics.printf(selectedPortraitDisplayName, self.font, self.x, self.y-70, self.limit, self.align)    
             love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)

@@ -16,8 +16,8 @@ function Calendar:new(calendarConfig, object)
             startDate = 4,
             numDays = 8,
             -- default position when phone is closed
-            defaultX = 1025,
-            defaultY = 495,
+            defaultX = 995,
+            defaultY = 490,
             diffY = 244,
         }
 
@@ -48,8 +48,8 @@ end
 
 function Calendar:load()
     self:initDayList()
-    closedTransform = love.math.newTransform(self.defaultX, self.defaultY, 0, 2)
-    openedTransform = love.math.newTransform(self.defaultX, self.defaultY - self.diffY, 0, 2)
+    closedTransform = love.math.newTransform(self.defaultX, self.defaultY, 0, 1.25)
+    openedTransform = love.math.newTransform(self.defaultX, self.defaultY - self.diffY, 0, 1.25)
 end
 
 function Calendar:update(dt)

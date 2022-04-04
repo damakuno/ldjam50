@@ -18,7 +18,7 @@ function progressDay()
     else
         player:reduceCash(bills)
     end
-    bills = bills + 10 -- dummy constant now. TODO turn into variable cumulative debt?
+    bills = bills + 5 -- dummy constant now. TODO turn into variable cumulative debt?
 end
 
 function gameEnd(endingNumber)
@@ -40,7 +40,7 @@ local Scene = {
 	load = function(self)
         triggerFade = false
         timeOfDay = "morning"
-        bills = 50
+        bills = 35
         hoverButtonName = ""
         storyType = ""
         player = Player:new()        
@@ -139,7 +139,7 @@ local Scene = {
                 random_choice = randomInt(1, 2)
                 debug_text = "random_choice rolled: "..random_choice
                 story:setNewStory("dialog/work_actx"..random_choice)
-            end    
+            end
             story:registerCallback("storyend", function() debug_text = story.path.."storyend triggered" end)            
             if story.dialogButtons["option2"] == nil then
                 story.dialogButtons["option1"].onclick = function()                    
@@ -280,9 +280,10 @@ local Scene = {
         phone:draw()
         stats:draw()
         love.graphics.setColor(135 / 255, 76 / 255, 71 / 255, 1)
-        love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20) 
-        love.graphics.printf("hospital bill: "..bills, font, 740, 20, 200)        
-        love.graphics.printf(timeOfDay, font, 820, 480, 200)
+        love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20)         
+        love.graphics.setColor(255 / 255, 255 / 255, 255 / 205, 1)        
+        love.graphics.printf(timeOfDay, font, 995, 280, 200)
+        love.graphics.printf("bill: "..bills, font, 1125, 280, 200) 
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 
         player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance
         love.graphics.print(player_stats_text, 1000, 40)

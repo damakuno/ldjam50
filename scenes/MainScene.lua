@@ -252,6 +252,7 @@ local Scene = {
 
     end,
     draw = function(self)
+        love.graphics.setBackgroundColor(238 / 255, 238 / 255, 238 / 255, 1)
         map:draw()
         story:draw()
         phone:draw()

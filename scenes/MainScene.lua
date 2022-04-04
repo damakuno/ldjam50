@@ -4,7 +4,7 @@ function progressDay()
     -- special events can be handled by looking at curDate
     -- TODO: probably add bills to emails here
     -- check if player has enough money to pay hospital
-    local bills = 1000  -- dummy constant now. TODO turn into variable cumulative debt?
+    local bills = 100  -- dummy constant now. TODO turn into variable cumulative debt?
     if player.cash < bills then
         if player.latePaymentStrikes == 0 then
             mail:SendBillsWarningMail()
@@ -21,12 +21,14 @@ local Scene = {
 	load = function(self)    
         hoverButtonName = ""
         storyType = ""
-        player = Player:new()
+        player = Player:new()        
         portraits = {}
+        portraitPositions = {}
         portraitDisplayNames = {}
         for k, v in pairs(LIP.load("config/Portraits.ini")) do
             portraits[v.name] = Anime:new(v.name, love.graphics.newImage(v.image), v.width, v.height)
             portraitDisplayNames[v.name] = v.displayName
+            portraitPositions[v.name] = {x = v.x, y = v.y}
         end
         
         map = Map:new(mapConfig)

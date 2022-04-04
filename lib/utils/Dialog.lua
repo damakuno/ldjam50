@@ -50,7 +50,14 @@ function Dialog:draw()
             love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1)
         end
         local selectedPortrait = portraits[self.selectedPortraitName]        
-        if selectedPortrait ~= nill then selectedPortrait:draw(20, 50) end
+        if selectedPortrait ~= nill then
+            local position = portraitPositions[self.selectedPortraitName]
+            if position ~= nil then
+                selectedPortrait:draw(position.x, position.y)
+            else
+                selectedPortrait:draw(0, 0)
+            end
+        end
     end
 end
 

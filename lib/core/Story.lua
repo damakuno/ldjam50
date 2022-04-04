@@ -29,7 +29,7 @@ function Story:new(path, portraits, font, object)
     for key, values in pairs(LIP.load(path..".ini")) do      
         if values.type == "Button" then   
             object.dialogButtons[values.name] = Button:new(values.name,
-                values.x, values.y,
+                values.x, values.y + 70,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
                 Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),                
@@ -147,7 +147,7 @@ function Story:setNewStory(path)
     for key, values in pairs(LIP.load(path..".ini")) do
         if values.type == "Button" then            
             self.dialogButtons[values.name] = Button:new(values.name,
-                values.x, values.y,
+                values.x, values.y + 70,
                 values.width, values.height,
                 Anime:new(values.name.."img", love.graphics.newImage(values.image), values.width, values.height),
                 Anime:new(values.name.."img_hover", love.graphics.newImage(values.imageHover), values.width, values.height),                

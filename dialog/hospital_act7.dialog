@@ -7,20 +7,20 @@ FM ...
 MC Did the docs say anything?
 FM Yeah. Tonight. Maybe sometime. Tomorrow.
 MC_worried I see.
-FM I'm fine. With it. Really. (Rasp)
+FM_content I'm fine. With it. Really. (Rasp)
 MC_worried ...
 MC Does it hurt anywhere?
 FM ...
 FM No. The meds are. Helping with that. 
-FM It's also. Making everything weird.
-FM Heh. I sound weird.
+FM_content It's also. Making everything weird.
+FM_talk Heh. I sound weird.
 FM ...
 MC_worried ...
 MC You know I love you right sis?
-FM Heh. Yeah. I know. Dummy.
-FM I love you too.
+FM_happy Heh. Yeah. I know. Dummy.
+FM_happy I love you too.
 MC_worried Well if...I...uh.
 MC_worried If you need anything let me know.
-FM Hey. Could you. Do me a favour?
+FM_talk Hey. Could you. Do me a favour?
 MC_talk Sure, what is it?
-FM Stay here. With me. Until...well...you know.
+FM_talk Stay here. With me. Until...well...you know.

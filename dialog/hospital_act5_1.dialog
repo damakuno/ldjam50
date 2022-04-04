@@ -1,8 +1,8 @@
 MC_worried But I want to. 
 MC_worried You're right, which is why I need to care as much as I can now.
-FM But look at what it's doing to you.
+FM_worried But look at what it's doing to you.
 MC I know, but I'll have a lot of time to recover afterwards.
 MC For now, please just let me do this for you.
-FM (Sniffs)
-FM I love you bro.
+FM_sad (Sniffs)
+FM_sad I love you bro.
 MC I know.

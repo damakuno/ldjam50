@@ -1,19 +1,19 @@
 MC_worried What? No! You can't give up!
 MC_worried You have to fight it!
 FM Fight it?
-FM You know as well as I do that there's no cure.
+FM_talk You know as well as I do that there's no cure.
 MC_sad That doesn't matter!
 MC_sad People have miraculously been cured of cancer before, the same could happen to you.
 MC_sad Just don't give up. Please.
 FM Sighs
-FM Even if I could live by being hooked up to these machines forever, is that really living?
+FM_content Even if I could live by being hooked up to these machines forever, is that really living?
 MC_worried ...
-FM And what about you? 
-FM You're barely holding it together after a week.
-FM Working like this forever...you'll end up dying first.
+FM_worried And what about you? 
+FM_worried You're barely holding it together after a week.
+FM_worried Working like this forever...you'll end up dying first.
 MC_sad I'm not...I'm not letting you die.
-FM Brother. Listen. It's ok. Really.
-FM I've come to terms with it.
+FM_content Brother. Listen. It's ok. Really.
+FM_content I've come to terms with it.
 FM Now you need to come to terms with it too.
 MC_sad I...
-FM Do it for me. Please?
+FM_talk Do it for me. Please?

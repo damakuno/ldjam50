@@ -1,8 +1,8 @@
 MC_worried Nope! Don't even go there.
-FM But look at what it's doing to you.
+FM_worried But look at what it's doing to you.
 MC_worried I'm fine.
-FM Really? Have you looked in a mirror lately?
+FM_worried Really? Have you looked in a mirror lately?
 MC_sad I said I'm fine.
 FM Sighs
 FM I know you love me too much to let me go, but you can't keep this up much longer.
-FM All the work and stress is getting to you, and I love you too much to take you down with me.
+FM_sad All the work and stress is getting to you, and I love you too much to take you down with me.

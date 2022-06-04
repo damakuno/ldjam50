@@ -69,14 +69,14 @@ end
 
 function Dialog:updateDialogText()
     local text = self.text
-    if self.str_index < #text then
+    local byteoffset = utf8.offset(text, self.str_index) or 0
+
+    if byteoffset - 1 <= #text then
         self.displaying = true
         self:addIncrement(self.increment)
         
-        local byteoffset = utf8.offset(text, self.str_index)
-        if byteoffset ~= nil then       
-            self.display_text = text:sub(1, byteoffset - 1)
-        end
+        print("byteoffset: "..byteoffset.." displaytextlength: "..#self.display_text.." textlength: "..#text)        
+        self.display_text = text:sub(1, byteoffset - 1)
       
         local pitches = {
             [1] = 0.96,
@@ -88,13 +88,11 @@ function Dialog:updateDialogText()
         srcBlip:setPitch(pitches[randomInt(1, 5)])
         srcBlip:setVolume(0.5  * settings["Sound"].masterVolume * settings["Sound"].sfxVolume)
         srcBlip:play()
-
-        if string.sub(self.display_text, utf8.offset(self.display_text, -1) -1) == " " then
-            srcBlip:stop()
-        end
+        
     end
 
-    if self.str_index == #text then
+    if byteoffset - 1 > #text or byteoffset == 0 then
+        srcBlip:stop()
         if self.callback["textend"] ~= nil then
             if self.callbackFlag["textend"] == false then
                 self.callback["textend"](self)

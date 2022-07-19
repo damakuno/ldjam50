@@ -89,7 +89,7 @@ local Scene = {
         mail:playNotifSoundIfAny()
         
         map.mapButtons["Hospital"].onhover = function()
-            status_text = "Visit your sister at the hospital"
+            status_text = "Visita a tu hermana en el hospital"
         end
         map.mapButtons["Hospital"].onclick = function()
             -- play sound
@@ -165,7 +165,7 @@ local Scene = {
         end
         
         map.mapButtons["Work"].onhover = function()
-            status_text = "Go to work to earn money"
+            status_text = "Ve al trabajo para ganar dinero"
         end
 
         day3_option2_selected = false
@@ -256,7 +256,7 @@ local Scene = {
         end
 
         map.mapButtons["Park"].onhover = function()
-            status_text = "Go to the park to release stress"
+            status_text = "Ve al parque a liberar estrés"
         end
         map.mapButtons["Park"].onclick = function() 
             audio:playLocationClickSFX()
@@ -336,7 +336,7 @@ local Scene = {
         love.graphics.printf(status_text, dialog_font, 20, story.backgroundY + 20, story.background.spriteSheet:getWidth() - 20)         
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 205, 1)        
         love.graphics.printf(timeOfDay, font, 995, 280, 200)
-        love.graphics.printf("bill: "..bills, font, 1125, 280, 200) 
+        love.graphics.printf("Factura: "..bills, font, 1125, 280, 200) 
         love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 1) 
         player_stats_text = "cash: "..player.cash.." stress: "..player.stress.."/"..player.maxStress.." acceptance: "..player.acceptance
         

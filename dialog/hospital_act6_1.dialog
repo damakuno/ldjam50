@@ -1,15 +1,15 @@
-MC_worried Are you sure?
-MC_worried Last time you...well...
-FM I'm sure brother. 
-FM_content I've put up a good fight, and so have you, but it's time to call it a day.
-MC Is there anything I can do for you?
-MC You know, before...
-FM Not really.
-FM I had the nurses help me send out some letters, and I've already done what I have to.
-MC Ok.
+MC_worried ¿Estás segura?
+MC_worried La última vez tú... bueno...
+FM Estoy segura, Sammy.
+FM_content He dado una buena pelea, y tú también, pero es hora de que el día termine.
+MC ¿Hay algo que pueda hacer por ti?
+MC Ya sabes, antes de que...
+FM No realmente.
+FM Las enfermeras me ayudaron a enviar algunas cartas y ya hice lo que tenía que hacer.
+MC Bueno.
 MC_worried ...
 FM ...
-MC_sad I'll miss you.
-FM_talk And I'll be watching out for you.
-MC_talk Mom and dad would be proud of you.
-FM I hope so.
+MC_sad Te extrañaré.
+FM_talk Estaré observándote.
+MC_talk Mamá y papá estarían orgullosos de ti.
+FM Espero que sí.

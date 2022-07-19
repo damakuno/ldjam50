@@ -26,7 +26,7 @@ function Stats:new(object)
         }    
 
 
-    object.monitorBG = Anime:new("Monitor BG", love.graphics.newImage("res/images/ui/ui_stats_bg.png"))
+    object.monitorBG = Anime:new("Monitor BG", love.graphics.newImage("res/images/ui/ui_stats_bg_latam.png"))
     object.monitorBGX = love.graphics.getWidth() - object.monitorBG.spriteSheet:getWidth() - object.offsetX
     object.walletBG = Anime:new("Wallet BG", love.graphics.newImage("res/images/ui/ui_wallet_bg.png"))
     object.walletBGX = love.graphics.getWidth() - object.walletBG.spriteSheet:getWidth()

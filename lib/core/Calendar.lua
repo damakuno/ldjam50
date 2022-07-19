@@ -12,7 +12,7 @@ function Calendar:new(calendarConfig, object)
             callbackFlag = {},
             visible = true,
             -- for date display formatting
-            month = "March",
+            month = "Marzo",
             startDate = 4,
             numDays = 8,
             -- default position when phone is closed

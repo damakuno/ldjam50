@@ -1,18 +1,18 @@
-MC_happy Sis? SIS! YOU'RE AWAKE!
-FM NOT SO LOUD! Ugh. My head hurts.
-MC_talk Sorry, sorry.
-MC_talk It's uh...it's good to see you up and about.
+MC_happy ¿Liz? ¡LIZ! ¡ESTÁS DESPIERTA!
+FM ¡NO GRITES! Ay, me duele la cabeza.
+MC_talk Perdón perdón.
+MC_talk Me da mucho gusto verte despierta.
 FM_worried ...
-MC So, how've you been?
-MC Are they treating you alright?
-FM I guess?
+MC ¿Cómo has estado?
+MC ¿Te han tratado bien?
+FM ¿Supongo?
 MC_worried ...
-FM_talk Oh don't give me that look. I'm fine. Really.
-MC_talk That's good.
+FM_talk No me veas así. De veras que estoy bien.
+MC_talk Qué bien.
 MC ...
 FM ...
-FM_worried I'm sorry I worried you when I...
-FM_worried I don't know why I did that.
-FM_worried I don't even remember much about what happened.
+FM_worried Perdona si te preocupé cuando yo...
+FM_worried No sé por qué hice eso.
+FM_worried Ni siquiera recuerdo mucho de lo que pasó.
 MC ...
 

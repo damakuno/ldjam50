@@ -1,12 +1,12 @@
-FM Ok, what's with that look?
+FM Oye, ¿por qué me miras así?
 MC_sad ...
-MC_sad The job today didn't go according to plan.
-MC_worried I still got paid but I don't know if it's enough.
-FM_talk It's fine.
-MC_sad No, it's not.
-MC_sad If I don't make enough to pay for this machine...
-FM It doesn't change what'll happen to me in the end.
+MC_sad El trabajo no salió como esperaba hoy.
+MC_worried Siguen pagándome, pero no sé si con esto alcance.
+FM_talk Está bien.
+MC_sad No, no lo está.
+MC_sad Si no junto lo suficiente para pagar por esta máquina...
+FM Eso no cambiará lo que me pase al final.
 MC_worried ...
-FM_worried Look, I know how much it costs you just to keep this thing running.
-FM_worried I see the toll it's having on you too.
-FM_worried If you didn't have to care for me then...
+FM_worried Mira, sé lo mucho que te cuesta mantener esta cosa funcionando.
+FM_worried También te está afectando a ti.
+FM_worried Si no tuvieras que hacer esto por mí, tú...

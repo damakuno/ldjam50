@@ -1,19 +1,19 @@
-MC_worried What? No! You can't give up!
-MC_worried You have to fight it!
-FM Fight it?
-FM_talk You know as well as I do that there's no cure.
-MC_sad That doesn't matter!
-MC_sad People have miraculously been cured of cancer before, the same could happen to you.
-MC_sad Just don't give up. Please.
-FM Sighs
-FM_content Even if I could live by being hooked up to these machines forever, is that really living?
+MC_worried ¿Qué? ¡No! ¡No puedes rendirte!
+MC_worried ¡Tienes que luchar!
+FM ¿Luchar?
+FM_talk Sabes muy bien que no tengo cura.
+MC_sad ¡Eso no importa!
+MC_sad Hay gente que se ha curado milagrosamente del cáncer. Eso podría pasarte a ti también.
+MC_sad No te rindas. Por favor.
+FM *suspiro*
+FM_content Incluso si pudiera vivir conectada a estas máquinas por siempre, ¿realmente eso sería vivir?
 MC_worried ...
-FM_worried And what about you? 
-FM_worried You're barely holding it together after a week.
-FM_worried Working like this forever...you'll end up dying first.
-MC_sad I'm not...I'm not letting you die.
-FM_content Brother. Listen. It's ok. Really.
-FM_content I've come to terms with it.
-FM Now you need to come to terms with it too.
-MC_sad I...
-FM_talk Do it for me. Please?
+FM_worried ¿Y qué hay de ti?
+FM_worried Llevas una semana y apenas puedes seguir.
+FM_worried Si sigues trabajando así... tú serás el que muera primero.
+MC_sad No... No dejaré que mueras.
+FM_content Sammy, escucha. Está bien. En serio.
+FM_content Ya lo acepté.
+FM Ahora necesitas aceptarlo tú también.
+MC_sad Yo...
+FM_talk Házlo por mí, ¿sí?
